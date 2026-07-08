@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using SAPIENS_DEV.Logins;
 namespace SAPIENS_DEV
 {
 	internal static class Program
@@ -16,7 +16,7 @@ namespace SAPIENS_DEV
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			Application.Run(new FrmLogin());
 		}
 	}
 }

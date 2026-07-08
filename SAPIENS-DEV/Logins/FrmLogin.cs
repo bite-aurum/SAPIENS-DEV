@@ -13,7 +13,8 @@ namespace SAPIENS_DEV.Logins
 {
 	public partial class FrmLogin : Form
 	{
-		public FrmLogin()
+        
+        public FrmLogin()
 		{
 			InitializeComponent();
 		}
@@ -45,7 +46,7 @@ namespace SAPIENS_DEV.Logins
 
 		private void btnRegistrarse_Click(object sender, EventArgs e)
 		{
-			//new FrmRegistro(this).Show();
+			new FrmRegistro(this).Show();
 			Hide();
 		}
 	}

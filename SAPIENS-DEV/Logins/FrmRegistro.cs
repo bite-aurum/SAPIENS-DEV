@@ -33,13 +33,13 @@ namespace SAPIENS_DEV.Logins
 
         private void Alumno_Click(object sender, EventArgs e)
         {
-           // new FrmRegistroAlumno(login).Show();
+           new FrmRegistroAlumno(login).Show();
             Close();
         }
 
         private void Docente_Click(object sender, EventArgs e)
         {
-            // new FrmRegistroDocente(login).Show();
+            new FrmRegistroDocente(login).Show();
             Close();
         }
 
@@ -51,7 +51,7 @@ namespace SAPIENS_DEV.Logins
 
         private void lnkVolver_Click(object sender, EventArgs e)
         {
-            //login.Show();
+            login.Show();
             Close();
         }
     }

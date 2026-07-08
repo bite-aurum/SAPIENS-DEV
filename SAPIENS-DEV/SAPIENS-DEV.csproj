@@ -114,11 +114,23 @@
     <Compile Include="Logins\FrmRegistro.Designer.cs">
       <DependentUpon>FrmRegistro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logins\FrmRegistroAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logins\FrmRegistroAlumno.Designer.cs">
+      <DependentUpon>FrmRegistroAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logins\FrmRegistroCoordinador.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logins\FrmRegistroCoordinador.Designer.cs">
       <DependentUpon>FrmRegistroCoordinador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logins\FrmRegistroDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logins\FrmRegistroDocente.Designer.cs">
+      <DependentUpon>FrmRegistroDocente.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

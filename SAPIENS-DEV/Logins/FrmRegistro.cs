@@ -45,7 +45,7 @@ namespace SAPIENS_DEV.Logins
 
         private void Coordinador_Click(object sender, EventArgs e)
         {
-            //new FrmRegistroCoordinador(login).Show();
+            new FrmRegistroCoordinador(login).Show();
             Close();
         }
 

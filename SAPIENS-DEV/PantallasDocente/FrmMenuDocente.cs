@@ -53,8 +53,8 @@ namespace SAPIENS_DEV.PantallasDocente
 		}
 
 		public void IrDashboard() { Navegar(new FrmDashboardDocente(this), "Bienvenido, " + Db.NombreUsuario, btnDashboard); }
-		//public void IrProyectos() { Navegar(new FrmProyectosDocente(this), "Mis proyectos", btnProyectos); }
-		//public void IrNuevoProyecto() { Navegar(new FrmNuevoProyecto(this), "Nuevo proyecto", btnProyectos); }
+		public void IrProyectos() { Navegar(new FrmProyectosDocente(this), "Mis proyectos", btnProyectos); }
+		public void IrNuevoProyecto() { Navegar(new FrmNuevoProyecto(this), "Nuevo proyecto", btnProyectos); }
 		// ▼ Cuando agregues la parte 2, reemplaza los MessageBox por el Navegar correspondiente
 		public void IrTareas() { MessageBox.Show("Sección Tareas — parte 2.", "SAPIENS"); }
 		public void IrEntregas() { MessageBox.Show("Sección Entregas — parte 2.", "SAPIENS"); }
@@ -62,7 +62,7 @@ namespace SAPIENS_DEV.PantallasDocente
 		public void IrNotificaciones() { MessageBox.Show("Sección Notificaciones — parte 2.", "SAPIENS"); }
 
 		private void btnDashboard_Click(object sender, EventArgs e) { IrDashboard(); }
-		//private void btnProyectos_Click(object sender, EventArgs e) { IrProyectos(); }
+		private void btnProyectos_Click(object sender, EventArgs e) { IrProyectos(); }
 		//private void btnTareas_Click(object sender, EventArgs e) { IrTareas(); }
 		//private void btnEntregas_Click(object sender, EventArgs e) { IrEntregas(); }
 		//private void btnReportes_Click(object sender, EventArgs e) { IrReportes(); }

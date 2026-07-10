@@ -144,6 +144,18 @@
     <Compile Include="PantallasDocente\FrmMenuDocente.Designer.cs">
       <DependentUpon>FrmMenuDocente.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasDocente\FrmNuevoProyecto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmNuevoProyecto.Designer.cs">
+      <DependentUpon>FrmNuevoProyecto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmProyectosDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmProyectosDocente.Designer.cs">
+      <DependentUpon>FrmProyectosDocente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

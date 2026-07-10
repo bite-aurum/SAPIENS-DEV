@@ -153,5 +153,123 @@ namespace SAPIENS_DEV.AccesoDatos
 				return dt;
 			}
 		}
+		
+		static int Escalar(string sql, int idDocente)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var cmd = new MySqlCommand(sql, cn);
+				cmd.Parameters.AddWithValue("@d", idDocente);
+				return Convert.ToInt32(cmd.ExecuteScalar());
+			}
+		}
+
+		static DataTable Tabla(string sql, int idDocente)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var da = new MySqlDataAdapter(sql, cn);
+				da.SelectCommand.Parameters.AddWithValue("@d", idDocente);
+				var dt = new DataTable();
+				da.Fill(dt);
+				return dt;
+			}
+		}
+
+		
+		public static int ContarProyectos(int idDoc)
+		{ return Escalar("SELECT COUNT(*) FROM proyecto WHERE id_docente=@d AND estado='activo'", idDoc); }
+
+		public static int ContarTareas(int idDoc)
+		{ return Escalar("SELECT COUNT(*) FROM tarea t JOIN proyecto p ON t.id_proyecto=p.id_proyecto WHERE p.id_docente=@d", idDoc); }
+
+		public static int ContarEntregasPendientes(int idDoc)
+		{ return Escalar("SELECT COUNT(*) FROM entrega e JOIN proyecto p ON e.id_proyecto=p.id_proyecto WHERE p.id_docente=@d AND e.estado='pendiente'", idDoc); }
+
+		public static int ContarAlumnos(int idDoc)
+		{ return Escalar("SELECT COUNT(DISTINCT ap.id_alumno) FROM alumno_proyecto ap JOIN proyecto p ON ap.id_proyecto=p.id_proyecto WHERE p.id_docente=@d", idDoc); }
+
+		public static DataTable TareasRecientes(int idDoc)
+		{
+			return Tabla(
+				"SELECT t.titulo AS Tarea, DATE_FORMAT(t.fecha_limite,'%d/%m/%Y') AS Vence, t.prioridad AS Prioridad " +
+				"FROM tarea t JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+				"WHERE p.id_docente=@d ORDER BY t.fecha_limite LIMIT 6", idDoc);
+		}
+
+		public static DataTable ActividadReciente(int idDoc)
+		{
+			return Tabla(
+				"SELECT CONCAT(a.nombre,' ',a.apellido_paterno,' entregó ',ar.nombre_archivo) AS actividad " +
+				"FROM archivo ar JOIN alumno a ON ar.id_alumno=a.id_alumno " +
+				"JOIN entrega e ON ar.id_entrega=e.id_entrega " +
+				"JOIN proyecto p ON e.id_proyecto=p.id_proyecto " +
+				"WHERE p.id_docente=@d ORDER BY ar.fecha_subida DESC LIMIT 5", idDoc);
+		}
+
+	
+		public static DataTable ObtenerProyectos(int idDoc)
+		{
+			return Tabla(
+				"SELECT p.id_proyecto, p.nombre, p.problematica, p.estado, p.fecha_inicio, p.fecha_fin, " +
+				"(SELECT COUNT(DISTINCT ap.id_alumno) FROM alumno_proyecto ap WHERE ap.id_proyecto=p.id_proyecto) AS alumnos, " +
+				"(SELECT COUNT(*) FROM tarea t WHERE t.id_proyecto=p.id_proyecto) AS tareas, " +
+				"(SELECT COUNT(*) FROM entrega e WHERE e.id_proyecto=p.id_proyecto) AS entregas, " +
+				"IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+				" JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+				"FROM proyecto p WHERE p.id_docente=@d ORDER BY p.id_proyecto", idDoc);
+		}
+
+		public static int CrearProyecto(string nombre, string desc, string prob, string obj,
+										DateTime inicio, DateTime fin, int idDoc)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var cmd = new MySqlCommand(
+					"INSERT INTO proyecto(nombre, descripcion, problematica, objetivos, fecha_inicio, fecha_fin, estado, id_docente) " +
+					"VALUES(@n, @de, @pr, @ob, @fi, @ff, 'activo', @d)", cn);
+				cmd.Parameters.AddWithValue("@n", nombre);
+				cmd.Parameters.AddWithValue("@de", desc);
+				cmd.Parameters.AddWithValue("@pr", prob);
+				cmd.Parameters.AddWithValue("@ob", obj);
+				cmd.Parameters.AddWithValue("@fi", inicio.Date);
+				cmd.Parameters.AddWithValue("@ff", fin.Date);
+				cmd.Parameters.AddWithValue("@d", idDoc);
+				cmd.ExecuteNonQuery();
+				return (int)cmd.LastInsertedId;
+			}
+		}
+
+		public static DataTable BuscarAlumno(string texto)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var da = new MySqlDataAdapter(
+					"SELECT id_alumno, CONCAT(nombre,' ',apellido_paterno,' ',apellido_materno) AS nombre_completo, matricula " +
+					"FROM alumno WHERE matricula LIKE @b OR CONCAT(nombre,' ',apellido_paterno) LIKE @b LIMIT 5", cn);
+				da.SelectCommand.Parameters.AddWithValue("@b", "%" + texto + "%");
+				var dt = new DataTable();
+				da.Fill(dt);
+				return dt;
+			}
+		}
+
+		public static void AsignarAlumno(int idProyecto, int idAlumno, string rol)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var cmd = new MySqlCommand(
+					"INSERT INTO alumno_proyecto(id_alumno, id_proyecto, rol) VALUES(@a, @p, @r)", cn);
+				cmd.Parameters.AddWithValue("@a", idAlumno);
+				cmd.Parameters.AddWithValue("@p", idProyecto);
+				cmd.Parameters.AddWithValue("@r", rol);
+				cmd.ExecuteNonQuery();
+			}
+		}
 	}
 }

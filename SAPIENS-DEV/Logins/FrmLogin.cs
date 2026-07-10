@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.PantallasDocente;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,10 +33,8 @@ namespace SAPIENS_DEV.Logins
 			try
 			{
 				string rol = Db.Login(txtCorreo.Text.Trim(), txtPass.Text);
-				if (rol == null)
-				{ MessageBox.Show("Correo o contraseña incorrectos.", "SAPIENS"); return; }
-
-				MessageBox.Show("Bienvenido " + Db.NombreUsuario + " (" + rol + ")", "SAPIENS");
+				if (rol == "docente") { new FrmMenuDocente(this).Show(); Hide(); }
+				else MessageBox.Show("Bienvenido " + Db.NombreUsuario + " (" + rol + ") — menú en construcción.", "SAPIENS");
 				// abrir el formulario segun el rol
 			}
 			catch (Exception ex)

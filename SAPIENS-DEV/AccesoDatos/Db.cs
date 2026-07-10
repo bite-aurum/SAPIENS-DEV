@@ -153,7 +153,7 @@ namespace SAPIENS_DEV.AccesoDatos
 				return dt;
 			}
 		}
-		// ================== HELPERS ==================
+		
 		static int Escalar(string sql, int idDocente)
 		{
 			using (var cn = Conectar())
@@ -178,7 +178,7 @@ namespace SAPIENS_DEV.AccesoDatos
 			}
 		}
 
-		// ================== DASHBOARD ==================
+		
 		public static int ContarProyectos(int idDoc)
 		{ return Escalar("SELECT COUNT(*) FROM proyecto WHERE id_docente=@d AND estado='activo'", idDoc); }
 
@@ -209,7 +209,7 @@ namespace SAPIENS_DEV.AccesoDatos
 				"WHERE p.id_docente=@d ORDER BY ar.fecha_subida DESC LIMIT 5", idDoc);
 		}
 
-		// ================== PROYECTOS ==================
+	
 		public static DataTable ObtenerProyectos(int idDoc)
 		{
 			return Tabla(

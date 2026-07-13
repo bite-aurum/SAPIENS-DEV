@@ -55,18 +55,20 @@ namespace SAPIENS_DEV.PantallasDocente
 		public void IrDashboard() { Navegar(new FrmDashboardDocente(this), "Bienvenido, " + Db.NombreUsuario, btnDashboard); }
 		public void IrProyectos() { Navegar(new FrmProyectosDocente(this), "Mis proyectos", btnProyectos); }
 		public void IrNuevoProyecto() { Navegar(new FrmNuevoProyecto(this), "Nuevo proyecto", btnProyectos); }
-		// ▼ Cuando agregues la parte 2, reemplaza los MessageBox por el Navegar correspondiente
-		public void IrTareas() { MessageBox.Show("Sección Tareas — parte 2.", "SAPIENS"); }
-		public void IrEntregas() { MessageBox.Show("Sección Entregas — parte 2.", "SAPIENS"); }
-		public void IrReportes() { MessageBox.Show("Sección Reportes — parte 2.", "SAPIENS"); }
-		public void IrNotificaciones() { MessageBox.Show("Sección Notificaciones — parte 2.", "SAPIENS"); }
 
-		private void btnDashboard_Click(object sender, EventArgs e) { IrDashboard(); }
+        public void IrTareas() { Navegar(new FrmTareasDocente(this), "Tareas", btnTareas); }
+        //public void IrNuevaTarea() { Navegar(new FrmNuevaTarea(this), "Nueva tarea", btnTareas); }
+        //public void IrEntregas() { Navegar(new FrmEntregasDocente(this), "Entregas", btnEntregas); }
+        //public void IrNuevaEntrega() { Navegar(new FrmNuevaEntrega(this), "Nueva entrega", btnEntregas); }
+        //public void IrReportes() { Navegar(new FrmReportesDocente(this), "Reportes", btnReportes); }
+        //public void IrNotificaciones() { Navegar(new FrmNotificacionesDocente(this), "Notificaciones", btnNotificaciones); }
+
+        private void btnDashboard_Click(object sender, EventArgs e) { IrDashboard(); }
 		private void btnProyectos_Click(object sender, EventArgs e) { IrProyectos(); }
-		//private void btnTareas_Click(object sender, EventArgs e) { IrTareas(); }
+		private void btnTareas_Click(object sender, EventArgs e) { IrTareas(); }
 		//private void btnEntregas_Click(object sender, EventArgs e) { IrEntregas(); }
 		//private void btnReportes_Click(object sender, EventArgs e) { IrReportes(); }
-		private void btnNotificaciones_Click(object sender, EventArgs e) { IrNotificaciones(); }
+		//private void btnNotificaciones_Click(object sender, EventArgs e) { IrNotificaciones(); }
 
 		private void btnConfiguracion_Click(object sender, EventArgs e)
 		{
@@ -85,5 +87,6 @@ namespace SAPIENS_DEV.PantallasDocente
 			using (var p = new Pen(Color.FromArgb(229, 231, 235)))
 				e.Graphics.DrawLine(p, 0, pnlHeader.Height - 1, pnlHeader.Width, pnlHeader.Height - 1);
 		}
-	}
+
+    }
 }

@@ -183,6 +183,8 @@
             this.btnEntregas.TabIndex = 5;
             this.btnEntregas.Text = "   📤  Entregas";
             this.btnEntregas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntregas.Click += new System.EventHandler(this.btnEntregas_Click);
+
             // 
             // btnReportes
             // 

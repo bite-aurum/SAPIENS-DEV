@@ -65,7 +65,7 @@ namespace SAPIENS_DEV.AccesoDatos
 			return null;
 		}
 
-		// true si el correo ya está en cualquiera de los 3 catálogos
+		// true si el correo ya está en cualquiera de los 3 
 		public static bool CorreoExiste(string correo)
 		{
 			using (var cn = Conectar())
@@ -271,5 +271,207 @@ namespace SAPIENS_DEV.AccesoDatos
 				cmd.ExecuteNonQuery();
 			}
 		}
-	}
+
+        // tareas
+        public static DataTable ObtenerTareas(int idDoc)
+        {
+            return Tabla(
+                "SELECT t.id_tarea, t.titulo, t.estado, t.prioridad, t.fecha_limite, " +
+                "p.id_proyecto, p.nombre AS proyecto, p.fecha_inicio, " +
+                "(SELECT COUNT(*) FROM subtarea s WHERE s.id_tarea=t.id_tarea) AS subtareas " +
+                "FROM tarea t JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+                "WHERE p.id_docente=@d ORDER BY p.id_proyecto, t.fecha_limite", idDoc);
+        }
+
+        public static DataTable ProyectosCombo(int idDoc)
+        {
+            return Tabla(
+                "SELECT p.id_proyecto, CONCAT('PROY-', YEAR(p.fecha_inicio), '-', LPAD(p.id_proyecto,3,'0'), ' — ', p.nombre) AS etiqueta " +
+                "FROM proyecto p WHERE p.id_docente=@d ORDER BY p.id_proyecto", idDoc);
+        }
+
+        public static int CrearTarea(string titulo, string desc, string prioridad, DateTime limite, int idProyecto)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO tarea(titulo, descripcion, estado, prioridad, fecha_limite, id_proyecto) " +
+                    "VALUES(@t, @de, 'pendiente', @pr, @fl, @p)", cn);
+                cmd.Parameters.AddWithValue("@t", titulo);
+                cmd.Parameters.AddWithValue("@de", desc);
+                cmd.Parameters.AddWithValue("@pr", prioridad);
+                cmd.Parameters.AddWithValue("@fl", limite.Date);
+                cmd.Parameters.AddWithValue("@p", idProyecto);
+                cmd.ExecuteNonQuery();
+                return (int)cmd.LastInsertedId;
+            }
+        }
+
+        public static void CrearSubtarea(string titulo, string desc, int idTarea)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO subtarea(titulo, descripcion, estado, id_tarea) VALUES(@t, @de, 'pendiente', @it)", cn);
+                cmd.Parameters.AddWithValue("@t", titulo);
+                cmd.Parameters.AddWithValue("@de", desc);
+                cmd.Parameters.AddWithValue("@it", idTarea);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // entregas
+        public static DataTable ObtenerEntregasDoc(int idDoc)
+        {
+            return Tabla(
+                "SELECT e.id_entrega, e.titulo, e.fecha_limite, e.estado, p.id_proyecto, p.nombre AS proyecto, p.fecha_inicio " +
+                "FROM entrega e JOIN proyecto p ON e.id_proyecto=p.id_proyecto " +
+                "WHERE p.id_docente=@d ORDER BY p.id_proyecto, e.fecha_limite", idDoc);
+        }
+
+        public static int CrearEntrega(string titulo, string desc, DateTime fecha, int idProyecto)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO entrega(titulo, descripcion, fecha_limite, estado, id_proyecto) " +
+                    "VALUES(@t, @de, @f, 'pendiente', @p)", cn);
+                cmd.Parameters.AddWithValue("@t", titulo);
+                cmd.Parameters.AddWithValue("@de", desc);
+                cmd.Parameters.AddWithValue("@f", fecha.Date);
+                cmd.Parameters.AddWithValue("@p", idProyecto);
+                cmd.ExecuteNonQuery();
+                return (int)cmd.LastInsertedId;
+            }
+        }
+
+        // reportes
+        public static DataTable ObtenerReportes(int idDoc)
+        {
+            return Tabla(
+                "SELECT r.id_reporte, r.tipo, r.fecha, r.contenido, IFNULL(p.nombre,'Todos los proyectos') AS proyecto " +
+                "FROM reporte r LEFT JOIN proyecto p ON r.id_proyecto=p.id_proyecto " +
+                "WHERE r.id_docente=@d ORDER BY r.fecha DESC, r.id_reporte DESC", idDoc);
+        }
+
+        public static void CrearReporte(string tipo, string contenido, int idDoc, int idProyecto)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO reporte(tipo, contenido, id_docente, id_proyecto) VALUES(@t, @c, @d, @p)", cn);
+                cmd.Parameters.AddWithValue("@t", tipo);
+                cmd.Parameters.AddWithValue("@c", contenido);
+                cmd.Parameters.AddWithValue("@d", idDoc);
+                cmd.Parameters.AddWithValue("@p", idProyecto == 0 ? (object)DBNull.Value : idProyecto);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        static DataTable TablaReporte(string sql, int idDoc, int idProyecto)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                if (idProyecto > 0) sql += " AND p.id_proyecto=@p";
+                if (sql.Contains("GROUP__BY")) sql = sql.Replace("GROUP__BY", "GROUP BY");
+                var da = new MySqlDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@d", idDoc);
+                if (idProyecto > 0) da.SelectCommand.Parameters.AddWithValue("@p", idProyecto);
+                var dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        // idProyecto = 0 significa "todos mis proyectos"
+        public static string GenerarContenido(string tipo, int idDoc, int idProyecto)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("REPORTE: " + tipo.ToUpper());
+            sb.AppendLine("Docente: " + NombreUsuario + " · Fecha: " + DateTime.Today.ToString("dd/MM/yyyy"));
+            sb.AppendLine(new string('-', 50));
+            DataTable dt;
+
+            if (tipo == "Avance por proyecto")
+            {
+                dt = TablaReporte(
+                    "SELECT p.nombre, IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) " +
+                    "FROM subtarea s JOIN tarea t ON s.id_tarea=t.id_tarea WHERE t.id_proyecto=p.id_proyecto),0) AS avance " +
+                    "FROM proyecto p WHERE p.id_docente=@d", idDoc, idProyecto);
+                foreach (DataRow r in dt.Rows) sb.AppendLine("• " + r["nombre"] + ": " + r["avance"] + "% de avance");
+            }
+            else if (tipo == "Tareas completadas vs pendientes")
+            {
+                dt = TablaReporte(
+                    "SELECT p.nombre, IFNULL(SUM(t.estado='completada'),0) AS comp, IFNULL(SUM(t.estado<>'completada'),0) AS pend " +
+                    "FROM proyecto p LEFT JOIN tarea t ON t.id_proyecto=p.id_proyecto " +
+                    "WHERE p.id_docente=@d GROUP__BY p.id_proyecto", idDoc, idProyecto);
+                foreach (DataRow r in dt.Rows) sb.AppendLine("• " + r["nombre"] + ": " + r["comp"] + " completadas / " + r["pend"] + " pendientes");
+            }
+            else if (tipo == "Entregas a tiempo vs tardías")
+            {
+                dt = TablaReporte(
+                    "SELECT p.nombre, IFNULL(SUM(e.estado='entregada'),0) AS ent, " +
+                    "IFNULL(SUM(e.estado<>'entregada' AND e.fecha_limite<CURDATE()),0) AS tard, COUNT(e.id_entrega) AS tot " +
+                    "FROM proyecto p LEFT JOIN entrega e ON e.id_proyecto=p.id_proyecto " +
+                    "WHERE p.id_docente=@d GROUP__BY p.id_proyecto", idDoc, idProyecto);
+                foreach (DataRow r in dt.Rows) sb.AppendLine("• " + r["nombre"] + ": " + r["ent"] + " entregadas · " + r["tard"] + " tardías · " + r["tot"] + " en total");
+            }
+            else // Subtareas por estado
+            {
+                dt = TablaReporte(
+                    "SELECT s.estado, COUNT(*) AS n FROM subtarea s " +
+                    "JOIN tarea t ON s.id_tarea=t.id_tarea JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+                    "WHERE p.id_docente=@d GROUP__BY s.estado", idDoc, idProyecto);
+                foreach (DataRow r in dt.Rows) sb.AppendLine("• " + r["estado"] + ": " + r["n"] + " subtareas");
+            }
+            if (dt.Rows.Count == 0) sb.AppendLine("Sin datos para este reporte.");
+            return sb.ToString();
+        }
+
+        public static DataTable AlumnosDeProyecto(int idProyecto)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var da = new MySqlDataAdapter(
+                    "SELECT a.id_alumno, CONCAT(a.nombre,' ',a.apellido_paterno,' — ',a.matricula) AS etiqueta " +
+                    "FROM alumno_proyecto ap JOIN alumno a ON ap.id_alumno=a.id_alumno " +
+                    "WHERE ap.id_proyecto=@p ORDER BY a.nombre", cn);
+                da.SelectCommand.Parameters.AddWithValue("@p", idProyecto);
+                var dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        public static void EnviarNotificacion(string mensaje, string tipo, int idAlumno)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO notificacion(mensaje, tipo, leida, id_alumno) VALUES(@m, @t, 0, @a)", cn);
+                cmd.Parameters.AddWithValue("@m", mensaje);
+                cmd.Parameters.AddWithValue("@t", tipo);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static DataTable NotificacionesEnviadas(int idDoc)
+        {
+            return Tabla(
+                "SELECT n.mensaje, n.tipo, n.fecha, CONCAT(a.nombre,' ',a.apellido_paterno) AS alumno " +
+                "FROM notificacion n JOIN alumno a ON n.id_alumno=a.id_alumno " +
+                "WHERE n.id_alumno IN (SELECT ap.id_alumno FROM alumno_proyecto ap " +
+                " JOIN proyecto p ON ap.id_proyecto=p.id_proyecto WHERE p.id_docente=@d) " +
+                "ORDER BY n.fecha DESC, n.id_notificacion DESC LIMIT 15", idDoc);
+        }
+    }
 }

@@ -102,7 +102,7 @@ namespace SAPIENS_DEV.PantallasDocente
                 cx += 105;
             }
 
-            // estado (color según guía: éxito verde / advertencia ámbar)
+            // estado 
             string estado = r["estado"].ToString();
             var lblEstado = new Label
             {

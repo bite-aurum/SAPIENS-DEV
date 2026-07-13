@@ -144,6 +144,12 @@
     <Compile Include="PantallasDocente\FrmMenuDocente.Designer.cs">
       <DependentUpon>FrmMenuDocente.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasDocente\FrmNuevaTarea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmNuevaTarea.Designer.cs">
+      <DependentUpon>FrmNuevaTarea.cs</DependentUpon>
+    </Compile>
     <Compile Include="PantallasDocente\FrmNuevoProyecto.cs">
       <SubType>Form</SubType>
     </Compile>

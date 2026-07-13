@@ -57,7 +57,7 @@ namespace SAPIENS_DEV.PantallasDocente
 		public void IrNuevoProyecto() { Navegar(new FrmNuevoProyecto(this), "Nuevo proyecto", btnProyectos); }
 
         public void IrTareas() { Navegar(new FrmTareasDocente(this), "Tareas", btnTareas); }
-        //public void IrNuevaTarea() { Navegar(new FrmNuevaTarea(this), "Nueva tarea", btnTareas); }
+        public void IrNuevaTarea() { Navegar(new FrmNuevaTarea(this), "Nueva tarea", btnTareas); }
         public void IrEntregas() { Navegar(new FrmEntregasDocente(this), "Entregas", btnEntregas); }
         public void IrNuevaEntrega() { Navegar(new FrmNuevaEntrega(this), "Nueva entrega", btnEntregas); }
         //public void IrReportes() { Navegar(new FrmReportesDocente(this), "Reportes", btnReportes); }

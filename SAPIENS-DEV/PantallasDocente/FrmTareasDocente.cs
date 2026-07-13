@@ -127,7 +127,7 @@ namespace SAPIENS_DEV.PantallasDocente
 
         private void btnNueva_Click(object sender, EventArgs e)
         {
-            //menu.IrNuevaTarea();
+            menu.IrNuevaTarea();
         }
     }
 }

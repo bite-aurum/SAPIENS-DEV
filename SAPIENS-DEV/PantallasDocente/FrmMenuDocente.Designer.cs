@@ -198,6 +198,7 @@
             this.btnReportes.TabIndex = 6;
             this.btnReportes.Text = "   📊  Reportes";
             this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // btnNotificaciones
             // 

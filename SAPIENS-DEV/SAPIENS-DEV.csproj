@@ -132,6 +132,30 @@
     <Compile Include="Logins\FrmRegistroDocente.Designer.cs">
       <DependentUpon>FrmRegistroDocente.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasCoordinador\FrmDocentesCoord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmDocentesCoord.Designer.cs">
+      <DependentUpon>FrmDocentesCoord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmMenuCoordinador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmMenuCoordinador.Designer.cs">
+      <DependentUpon>FrmMenuCoordinador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmProyectosCoord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmProyectosCoord.Designer.cs">
+      <DependentUpon>FrmProyectosCoord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmRendimientoCoord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmRendimientoCoord.Designer.cs">
+      <DependentUpon>FrmRendimientoCoord.cs</DependentUpon>
+    </Compile>
     <Compile Include="PantallasDocente\FrmDashboardDocente.cs">
       <SubType>Form</SubType>
     </Compile>

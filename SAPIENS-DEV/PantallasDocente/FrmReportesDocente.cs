@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -90,7 +91,7 @@ namespace SAPIENS_DEV.PantallasDocente
             };
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                //File.WriteAllText(sfd.FileName, ultimoContenido);
+                File.WriteAllText(sfd.FileName, ultimoContenido);
                 MessageBox.Show("Reporte guardado.", "SAPIENS");
             }
         }

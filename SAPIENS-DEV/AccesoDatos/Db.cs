@@ -473,5 +473,60 @@ namespace SAPIENS_DEV.AccesoDatos
                 " JOIN proyecto p ON ap.id_proyecto=p.id_proyecto WHERE p.id_docente=@d) " +
                 "ORDER BY n.fecha DESC, n.id_notificacion DESC LIMIT 15", idDoc);
         }
+        // ================== COORDINADOR ==================
+        public static int ContarProyectosCoord(int idCoord)
+        {
+            return Escalar("SELECT COUNT(*) FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
+                           "WHERE d.id_coordinador=@d", idCoord);
+        }
+
+        public static int ContarDocentesCoord(int idCoord)
+        { return Escalar("SELECT COUNT(*) FROM docente WHERE id_coordinador=@d", idCoord); }
+
+        // % de entregas que no están vencidas sin entregar
+        public static int EntregasATiempoCoord(int idCoord)
+        {
+            return Escalar(
+                "SELECT IFNULL(ROUND(SUM(e.estado='entregada' OR e.fecha_limite>=CURDATE())*100/COUNT(*)),100) " +
+                "FROM entrega e JOIN proyecto p ON e.id_proyecto=p.id_proyecto " +
+                "JOIN docente d ON p.id_docente=d.id_docente WHERE d.id_coordinador=@d", idCoord);
+        }
+
+        public static int ProyectosConRetraso(int idCoord)
+        {
+            return Escalar(
+                "SELECT COUNT(DISTINCT p.id_proyecto) FROM proyecto p " +
+                "JOIN docente d ON p.id_docente=d.id_docente " +
+                "JOIN entrega e ON e.id_proyecto=p.id_proyecto " +
+                "WHERE d.id_coordinador=@d AND e.estado='pendiente' AND e.fecha_limite<CURDATE()", idCoord);
+        }
+
+        // Se usa en Rendimiento y en Docentes
+        public static DataTable RendimientoDocentes(int idCoord)
+        {
+            return Tabla(
+                "SELECT d.id_docente, CONCAT(d.nombre,' ',d.apellido_paterno,' ',d.apellido_materno) AS docente, d.correo, " +
+                "(SELECT COUNT(*) FROM proyecto p WHERE p.id_docente=d.id_docente) AS proyectos, " +
+                "(SELECT COUNT(DISTINCT ap.id_alumno) FROM alumno_proyecto ap " +
+                " JOIN proyecto p2 ON ap.id_proyecto=p2.id_proyecto WHERE p2.id_docente=d.id_docente) AS alumnos, " +
+                "IFNULL((SELECT ROUND(SUM(e.estado='entregada' OR e.fecha_limite>=CURDATE())*100/COUNT(*)) " +
+                " FROM entrega e JOIN proyecto p3 ON e.id_proyecto=p3.id_proyecto " +
+                " WHERE p3.id_docente=d.id_docente),100) AS pct " +
+                "FROM docente d WHERE d.id_coordinador=@d ORDER BY d.id_docente", idCoord);
+        }
+
+        public static DataTable ProyectosDeCoordinador(int idCoord)
+        {
+            return Tabla(
+                "SELECT p.id_proyecto, p.nombre, p.problematica, p.estado, p.fecha_inicio, p.fecha_fin, " +
+                "d.id_docente, CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, " +
+                "(SELECT COUNT(DISTINCT ap.id_alumno) FROM alumno_proyecto ap WHERE ap.id_proyecto=p.id_proyecto) AS alumnos, " +
+                "(SELECT COUNT(*) FROM tarea t WHERE t.id_proyecto=p.id_proyecto) AS tareas, " +
+                "(SELECT COUNT(*) FROM entrega e WHERE e.id_proyecto=p.id_proyecto) AS entregas, " +
+                "IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+                " JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+                "FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
+                "WHERE d.id_coordinador=@d ORDER BY d.id_docente, p.id_proyecto", idCoord);
+        }
     }
 }

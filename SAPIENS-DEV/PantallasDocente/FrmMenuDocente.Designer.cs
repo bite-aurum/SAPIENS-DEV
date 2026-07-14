@@ -213,7 +213,7 @@
             this.btnNotificaciones.TabIndex = 7;
             this.btnNotificaciones.Text = "   🔔  Notificaciones";
             this.btnNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
+            this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
             // 
             // btnConfiguracion
             // 

@@ -138,23 +138,17 @@
     <Compile Include="PantallasDocente\FrmDashboardDocente.Designer.cs">
       <DependentUpon>FrmDashboardDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="PantallasDocente\FrmEntregasDocente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PantallasDocente\FrmEntregasDocente.Designer.cs">
-      <DependentUpon>FrmEntregasDocente.cs</DependentUpon>
-    </Compile>
     <Compile Include="PantallasDocente\FrmMenuDocente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PantallasDocente\FrmMenuDocente.Designer.cs">
       <DependentUpon>FrmMenuDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="PantallasDocente\FrmNuevaEntrega.cs">
+    <Compile Include="PantallasDocente\FrmNuevaTarea.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PantallasDocente\FrmNuevaEntrega.Designer.cs">
-      <DependentUpon>FrmNuevaEntrega.cs</DependentUpon>
+    <Compile Include="PantallasDocente\FrmNuevaTarea.Designer.cs">
+      <DependentUpon>FrmNuevaTarea.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallasDocente\FrmNuevoProyecto.cs">
       <SubType>Form</SubType>

@@ -473,7 +473,7 @@ namespace SAPIENS_DEV.AccesoDatos
                 " JOIN proyecto p ON ap.id_proyecto=p.id_proyecto WHERE p.id_docente=@d) " +
                 "ORDER BY n.fecha DESC, n.id_notificacion DESC LIMIT 15", idDoc);
         }
-        // ================== COORDINADOR ==================
+        // coordinador
         public static int ContarProyectosCoord(int idCoord)
         {
             return Escalar("SELECT COUNT(*) FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
@@ -483,7 +483,7 @@ namespace SAPIENS_DEV.AccesoDatos
         public static int ContarDocentesCoord(int idCoord)
         { return Escalar("SELECT COUNT(*) FROM docente WHERE id_coordinador=@d", idCoord); }
 
-        // % de entregas que no están vencidas sin entregar
+        // % de entregas que no están vencidas 
         public static int EntregasATiempoCoord(int idCoord)
         {
             return Escalar(

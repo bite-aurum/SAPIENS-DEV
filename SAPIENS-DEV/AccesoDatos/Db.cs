@@ -46,8 +46,7 @@ namespace SAPIENS_DEV.AccesoDatos
 				for (int i = 0; i < 3; i++)
 				{
 					var cmd = new MySqlCommand(
-						"SELECT " + t[i, 1] + ", nombre FROM " + t[i, 0] +
-						" WHERE correo=@c AND contrasena=@p", cn);
+						"SELECT " + t[i, 1] + ", nombre FROM " + t[i, 0] + " WHERE correo=@c AND contrasena=@p", cn);
 					cmd.Parameters.AddWithValue("@c", correo);
 					cmd.Parameters.AddWithValue("@p", h);
 					using (var r = cmd.ExecuteReader())

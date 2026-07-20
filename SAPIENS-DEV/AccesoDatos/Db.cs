@@ -473,5 +473,124 @@ namespace SAPIENS_DEV.AccesoDatos
                 " JOIN proyecto p ON ap.id_proyecto=p.id_proyecto WHERE p.id_docente=@d) " +
                 "ORDER BY n.fecha DESC, n.id_notificacion DESC LIMIT 15", idDoc);
         }
+        // Alumno
+        static DataTable TablaId(string sql, int id)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var da = new MySqlDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@i", id);
+                var dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        public static DataRow DatosAlumno(int idAl)
+        { return TablaId("SELECT matricula, carrera, grado, grupo FROM alumno WHERE id_alumno=@i", idAl).Rows[0]; }
+
+        public static int ContarProyectosAlumno(int idAl)
+        { return Escalar("SELECT COUNT(*) FROM alumno_proyecto WHERE id_alumno=@d", idAl); }
+
+        public static int TareasActivasAlumno(int idAl)
+        {
+            return Escalar(
+                "SELECT COUNT(*) FROM tarea t JOIN alumno_proyecto ap ON t.id_proyecto=ap.id_proyecto " +
+                "WHERE ap.id_alumno=@d AND t.estado<>'completada'", idAl);
+        }
+
+        public static int SubtareasPendientesAlumno(int idAl)
+        {
+            return Escalar(
+                "SELECT COUNT(*) FROM subtarea s JOIN tarea t ON s.id_tarea=t.id_tarea " +
+                "JOIN alumno_proyecto ap ON t.id_proyecto=ap.id_proyecto " +
+                "WHERE ap.id_alumno=@d AND s.estado<>'completada'", idAl);
+        }
+
+        public static DateTime? ProximaEntregaAlumno(int idAl)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "SELECT MIN(e.fecha_limite) FROM entrega e " +
+                    "JOIN alumno_proyecto ap ON e.id_proyecto=ap.id_proyecto " +
+                    "WHERE ap.id_alumno=@d AND e.estado='pendiente'", cn);
+                cmd.Parameters.AddWithValue("@d", idAl);
+                object r = cmd.ExecuteScalar();
+                return r == DBNull.Value || r == null ? (DateTime?)null : Convert.ToDateTime(r);
+            }
+        }
+
+        public static DataTable ProyectosDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT p.id_proyecto, p.nombre, p.problematica, p.estado, p.fecha_inicio, p.fecha_fin, ap.rol, " +
+                "CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, " +
+                "(SELECT COUNT(DISTINCT x.id_alumno) FROM alumno_proyecto x WHERE x.id_proyecto=p.id_proyecto) AS alumnos, " +
+                "(SELECT COUNT(*) FROM tarea t WHERE t.id_proyecto=p.id_proyecto) AS tareas, " +
+                "(SELECT COUNT(*) FROM entrega e WHERE e.id_proyecto=p.id_proyecto) AS entregas, " +
+                "(SELECT COUNT(*) FROM subtarea s JOIN tarea t3 ON s.id_tarea=t3.id_tarea " +
+                " WHERE t3.id_proyecto=p.id_proyecto AND s.estado<>'completada') AS sub_pend, " +
+                "IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+                " JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+                "FROM alumno_proyecto ap JOIN proyecto p ON ap.id_proyecto=p.id_proyecto " +
+                "JOIN docente d ON p.id_docente=d.id_docente " +
+                "WHERE ap.id_alumno=@d ORDER BY p.id_proyecto", idAl);
+        }
+
+        public static DataTable SubtareasRecientesAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT s.titulo, t.prioridad, t.fecha_limite, p.nombre AS proyecto " +
+                "FROM subtarea s JOIN tarea t ON s.id_tarea=t.id_tarea " +
+                "JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+                "JOIN alumno_proyecto ap ON p.id_proyecto=ap.id_proyecto " +
+                "WHERE ap.id_alumno=@d AND s.estado<>'completada' " +
+                "ORDER BY t.fecha_limite LIMIT 3", idAl);
+        }
+
+        public static DataRow ProyectoDetalleAlumno(int idProyecto, int idAl)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var da = new MySqlDataAdapter(
+                    "SELECT p.*, CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, ap.rol, " +
+                    "IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+                    " JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+                    "FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
+                    "JOIN alumno_proyecto ap ON ap.id_proyecto=p.id_proyecto AND ap.id_alumno=@a " +
+                    "WHERE p.id_proyecto=@p", cn);
+                da.SelectCommand.Parameters.AddWithValue("@a", idAl);
+                da.SelectCommand.Parameters.AddWithValue("@p", idProyecto);
+                var dt = new DataTable();
+                da.Fill(dt);
+                return dt.Rows[0];
+            }
+        }
+
+        public static DataTable EquipoDeProyecto(int idProyecto)
+        {
+            return TablaId(
+                "SELECT a.id_alumno, CONCAT(a.nombre,' ',a.apellido_paterno) AS nombre, a.matricula, ap.rol " +
+                "FROM alumno_proyecto ap JOIN alumno a ON ap.id_alumno=a.id_alumno " +
+                "WHERE ap.id_proyecto=@i ORDER BY ap.rol='líder' DESC, a.nombre", idProyecto);
+        }
+
+        public static DataTable EntregasDeProyecto(int idProyecto)
+        {
+            return TablaId(
+                "SELECT id_entrega, titulo, fecha_limite, estado FROM entrega " +
+                "WHERE id_proyecto=@i ORDER BY fecha_limite", idProyecto);
+        }
+
+        public static DataTable TareasDeProyecto(int idProyecto)
+        {
+            return TablaId(
+                "SELECT id_tarea, titulo, estado, prioridad, fecha_limite FROM tarea " +
+                "WHERE id_proyecto=@i ORDER BY fecha_limite", idProyecto);
+        }
     }
 }

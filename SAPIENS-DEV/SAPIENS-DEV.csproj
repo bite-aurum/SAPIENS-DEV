@@ -258,6 +258,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Actividad\Avance POO.docx" />
+    <None Include="Actividad\CRUD.docx" />
     <None Include="GUIA DE ESTILOS\Actividad De Aprendizaje 4 %281%29.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

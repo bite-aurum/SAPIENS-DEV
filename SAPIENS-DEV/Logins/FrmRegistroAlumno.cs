@@ -65,7 +65,15 @@ namespace SAPIENS_DEV.Logins
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar: " + ex.Message, "SAPIENS");
+                if(ex.Message.Contains("Duplicate entry"))
+                {
+                    MessageBox.Show("La matrícula ya está registrada.", "SAPIENS");
+
+                }
+                else
+                {
+                    MessageBox.Show("Error al crear la cuenta: " + ex.Message, "SAPIENS");
+                }
             }
         }
     }

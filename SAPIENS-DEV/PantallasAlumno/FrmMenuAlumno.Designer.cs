@@ -121,7 +121,7 @@
 			this.btnProyectos.Text = "   📁  Mis proyectos";
 			this.btnProyectos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnProyectos.Cursor = System.Windows.Forms.Cursors.Hand;
-			//this.btnProyectos.Click += new System.EventHandler(this.btnProyectos_Click);
+			this.btnProyectos.Click += new System.EventHandler(this.btnProyectos_Click);
 			// btnTareas
 			this.btnTareas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnTareas.FlatAppearance.BorderSize = 0;

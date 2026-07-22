@@ -647,7 +647,138 @@ namespace SAPIENS_DEV.AccesoDatos
 				"WHERE id_proyecto=@i ORDER BY fecha_limite", idProyecto);
 		}
 
+        //Alumno-tareas 
+        public static DataTable TareasDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT t.id_tarea, t.titulo, t.estado, t.prioridad, t.fecha_limite, " +
+                "p.id_proyecto, p.nombre AS proyecto, p.fecha_inicio, " +
+                "(SELECT COUNT(*) FROM subtarea s WHERE s.id_tarea=t.id_tarea) AS subtareas " +
+                "FROM tarea t JOIN alumno_proyecto ap ON t.id_proyecto=ap.id_proyecto " +
+                "JOIN proyecto p ON p.id_proyecto=t.id_proyecto " +
+                "WHERE ap.id_alumno=@d ORDER BY p.id_proyecto, t.fecha_limite", idAl);
+        }
+
+        public static DataRow TareaDetalle(int idTarea)
+        {
+            return TablaId(
+                "SELECT t.*, p.nombre AS proyecto, p.id_proyecto, p.fecha_inicio " +
+                "FROM tarea t JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+                "WHERE t.id_tarea=@i", idTarea).Rows[0];
+        }
+
+        public static DataTable SubtareasDeTarea(int idTarea)
+        {
+            return TablaId(
+                "SELECT id_subtarea, titulo, estado FROM subtarea WHERE id_tarea=@i ORDER BY id_subtarea", idTarea);
+        }
+
+        // Sube el archivo como evidencia y marca la subtarea como completada
+        public static void CompletarSubtareaConArchivo(int idSubtarea, int idAlumno, string nombre, string ruta, string mime)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO archivo(nombre_archivo, url, tipo_mime, id_entrega, id_alumno, id_subtarea) " +
+                    "VALUES(@n, @u, @m, NULL, @a, @s)", cn);
+                cmd.Parameters.AddWithValue("@n", nombre);
+                cmd.Parameters.AddWithValue("@u", ruta);
+                cmd.Parameters.AddWithValue("@m", mime);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("UPDATE subtarea SET estado='completada' WHERE id_subtarea=@s", cn);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("INSERT IGNORE INTO alumno_subtarea(id_alumno, id_subtarea) VALUES(@a, @s)", cn);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("SELECT id_tarea FROM subtarea WHERE id_subtarea=@s", cn);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                int idTarea = Convert.ToInt32(cmd.ExecuteScalar());
+
+                cmd = new MySqlCommand(
+                    "UPDATE tarea SET estado = IF((SELECT COUNT(*) FROM subtarea " +
+                    "WHERE id_tarea=@t AND estado<>'completada')=0,'completada','en progreso') WHERE id_tarea=@t", cn);
+                cmd.Parameters.AddWithValue("@t", idTarea);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        //Alumno- Entrega
+        public static DataTable EntregasDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT e.id_entrega, e.titulo, e.fecha_limite, e.estado, " +
+                "p.id_proyecto, p.nombre AS proyecto, p.fecha_inicio, " +
+                "(SELECT COUNT(*) FROM archivo ar WHERE ar.id_entrega=e.id_entrega AND ar.id_alumno=@d) AS ya_envie " +
+                "FROM entrega e JOIN alumno_proyecto ap ON e.id_proyecto=ap.id_proyecto " +
+                "JOIN proyecto p ON p.id_proyecto=e.id_proyecto " +
+                "WHERE ap.id_alumno=@d ORDER BY p.id_proyecto, e.fecha_limite", idAl);
+        }
+
+        public static DataRow EntregaDetalle(int idEntrega)
+        {
+            return TablaId(
+                "SELECT e.*, p.nombre AS proyecto, p.id_proyecto, p.fecha_inicio, " +
+                "CONCAT(d.nombre,' ',d.apellido_paterno) AS docente " +
+                "FROM entrega e JOIN proyecto p ON e.id_proyecto=p.id_proyecto " +
+                "JOIN docente d ON p.id_docente=d.id_docente WHERE e.id_entrega=@i", idEntrega).Rows[0];
+        }
+
+        public static DataTable ArchivosDeEntrega(int idEntrega)
+        {
+            return TablaId(
+                "SELECT ar.nombre_archivo, ar.fecha_subida, CONCAT(a.nombre,' ',a.apellido_paterno) AS alumno " +
+                "FROM archivo ar JOIN alumno a ON ar.id_alumno=a.id_alumno " +
+                "WHERE ar.id_entrega=@i ORDER BY ar.fecha_subida DESC", idEntrega);
+        }
+
+        public static void SubirArchivoEntrega(string nombre, string ruta, string mime, int idEntrega, int idAlumno)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand(
+                    "INSERT INTO archivo(nombre_archivo, url, tipo_mime, id_entrega, id_alumno) " +
+                    "VALUES(@n, @u, @m, @e, @a)", cn);
+                cmd.Parameters.AddWithValue("@n", nombre);
+                cmd.Parameters.AddWithValue("@u", ruta);
+                cmd.Parameters.AddWithValue("@m", mime);
+                cmd.Parameters.AddWithValue("@e", idEntrega);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("UPDATE entrega SET estado='entregada' WHERE id_entrega=@e", cn);
+                cmd.Parameters.AddWithValue("@e", idEntrega);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        //Alumno-Notificaciones 
+        public static DataTable NotificacionesDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT mensaje, tipo, fecha, leida FROM notificacion " +
+                "WHERE id_alumno=@d ORDER BY leida, fecha DESC, id_notificacion DESC", idAl);
+        }
+
+        public static void MarcarNotificacionesLeidas(int idAl)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand("UPDATE notificacion SET leida=1 WHERE id_alumno=@a", cn);
+                cmd.Parameters.AddWithValue("@a", idAl);
+                cmd.ExecuteNonQuery();
+            }
+        }
 
 
-	}
+    }
 }

@@ -36,10 +36,11 @@ namespace SAPIENS_DEV.Logins
 			{
 				string rol = Db.Login(txtCorreo.Text.Trim(), txtPass.Text);
 				if (rol == "docente") { new FrmMenuDocente(this).Show(); Hide(); }
-                else if (rol == "docente") { new FrmMenuDocente(this).Show(); Hide(); }
                 else if (rol == "coordinador") { new FrmMenuCoordinador(this).Show(); Hide(); }
 				else if (rol == "alumno") { new FrmMenuAlumno(this).Show(); Hide(); }
-                else MessageBox.Show("Bienvenido " + Db.NombreUsuario + " (" + rol + ") — menú en construcción.", "SAPIENS");
+                else MessageBox.Show("Acceso no concedido","SAPIENS");
+				txtCorreo.Clear();
+				txtPass.Clear();
                 // abrir el formulario segun el rol
             }
 			catch (Exception ex)

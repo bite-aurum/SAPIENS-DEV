@@ -1,5 +1,7 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.PantallasCoordinador;
 using SAPIENS_DEV.PantallasDocente;
+using SAPIENS_DEV.PantallasAlumno;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,9 +36,13 @@ namespace SAPIENS_DEV.Logins
 			{
 				string rol = Db.Login(txtCorreo.Text.Trim(), txtPass.Text);
 				if (rol == "docente") { new FrmMenuDocente(this).Show(); Hide(); }
-				else MessageBox.Show("Bienvenido " + Db.NombreUsuario + " (" + rol + ") — menú en construcción.", "SAPIENS");
-				// abrir el formulario segun el rol
-			}
+                else if (rol == "coordinador") { new FrmMenuCoordinador(this).Show(); Hide(); }
+				else if (rol == "alumno") { new FrmMenuAlumno(this).Show(); Hide(); }
+                else MessageBox.Show("Acceso no concedido","SAPIENS");
+				txtCorreo.Clear();
+				txtPass.Clear();
+                // abrir el formulario segun el rol
+            }
 			catch (Exception ex)
 			{
 				MessageBox.Show("Error de conexión: " + ex.Message, "SAPIENS");

@@ -183,6 +183,7 @@
             this.btnEntregas.TabIndex = 5;
             this.btnEntregas.Text = "   📤  Entregas";
             this.btnEntregas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntregas.Click += new System.EventHandler(this.btnEntregas_Click);
             // 
             // btnReportes
             // 
@@ -197,6 +198,7 @@
             this.btnReportes.TabIndex = 6;
             this.btnReportes.Text = "   📊  Reportes";
             this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // btnNotificaciones
             // 
@@ -211,7 +213,7 @@
             this.btnNotificaciones.TabIndex = 7;
             this.btnNotificaciones.Text = "   🔔  Notificaciones";
             this.btnNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
+            this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
             // 
             // btnConfiguracion
             // 

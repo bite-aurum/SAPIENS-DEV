@@ -46,8 +46,7 @@ namespace SAPIENS_DEV.AccesoDatos
 				for (int i = 0; i < 3; i++)
 				{
 					var cmd = new MySqlCommand(
-						"SELECT " + t[i, 1] + ", nombre FROM " + t[i, 0] +
-						" WHERE correo=@c AND contrasena=@p", cn);
+						"SELECT " + t[i, 1] + ", nombre FROM " + t[i, 0] + " WHERE correo=@c AND contrasena=@p", cn);
 					cmd.Parameters.AddWithValue("@c", correo);
 					cmd.Parameters.AddWithValue("@p", h);
 					using (var r = cmd.ExecuteReader())
@@ -473,6 +472,7 @@ namespace SAPIENS_DEV.AccesoDatos
                 " JOIN proyecto p ON ap.id_proyecto=p.id_proyecto WHERE p.id_docente=@d) " +
                 "ORDER BY n.fecha DESC, n.id_notificacion DESC LIMIT 15", idDoc);
         }
+
         // Alumno
         static DataTable TablaId(string sql, int id)
         {
@@ -509,11 +509,217 @@ namespace SAPIENS_DEV.AccesoDatos
         }
 
         public static DateTime? ProximaEntregaAlumno(int idAl)
+
+        // coordinador
+        public static int ContarProyectosCoord(int idCoord)
+        {
+            return Escalar("SELECT COUNT(*) FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
+                           "WHERE d.id_coordinador=@d", idCoord);
+        }
+
+        public static int ContarDocentesCoord(int idCoord)
+        { return Escalar("SELECT COUNT(*) FROM docente WHERE id_coordinador=@d", idCoord); }
+
+        // % de entregas que no están vencidas 
+        public static int EntregasATiempoCoord(int idCoord)
+        {
+            return Escalar(
+                "SELECT IFNULL(ROUND(SUM(e.estado='entregada' OR e.fecha_limite>=CURDATE())*100/COUNT(*)),100) " +
+                "FROM entrega e JOIN proyecto p ON e.id_proyecto=p.id_proyecto " +
+                "JOIN docente d ON p.id_docente=d.id_docente WHERE d.id_coordinador=@d", idCoord);
+        }
+
+        public static int ProyectosConRetraso(int idCoord)
+        {
+            return Escalar(
+                "SELECT COUNT(DISTINCT p.id_proyecto) FROM proyecto p " +
+                "JOIN docente d ON p.id_docente=d.id_docente " +
+                "JOIN entrega e ON e.id_proyecto=p.id_proyecto " +
+                "WHERE d.id_coordinador=@d AND e.estado='pendiente' AND e.fecha_limite<CURDATE()", idCoord);
+        }
+
+        // Se usa en Rendimiento y en Docentes
+        public static DataTable RendimientoDocentes(int idCoord)
+        {
+            return Tabla(
+                "SELECT d.id_docente, CONCAT(d.nombre,' ',d.apellido_paterno,' ',d.apellido_materno) AS docente, d.correo, " +
+                "(SELECT COUNT(*) FROM proyecto p WHERE p.id_docente=d.id_docente) AS proyectos, " +
+                "(SELECT COUNT(DISTINCT ap.id_alumno) FROM alumno_proyecto ap " +
+                " JOIN proyecto p2 ON ap.id_proyecto=p2.id_proyecto WHERE p2.id_docente=d.id_docente) AS alumnos, " +
+                "IFNULL((SELECT ROUND(SUM(e.estado='entregada' OR e.fecha_limite>=CURDATE())*100/COUNT(*)) " +
+                " FROM entrega e JOIN proyecto p3 ON e.id_proyecto=p3.id_proyecto " +
+                " WHERE p3.id_docente=d.id_docente),100) AS pct " +
+                "FROM docente d WHERE d.id_coordinador=@d ORDER BY d.id_docente", idCoord);
+        }
+
+        public static DataTable ProyectosDeCoordinador(int idCoord)
+        {
+            return Tabla(
+                "SELECT p.id_proyecto, p.nombre, p.problematica, p.estado, p.fecha_inicio, p.fecha_fin, " +
+                "d.id_docente, CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, " +
+                "(SELECT COUNT(DISTINCT ap.id_alumno) FROM alumno_proyecto ap WHERE ap.id_proyecto=p.id_proyecto) AS alumnos, " +
+                "(SELECT COUNT(*) FROM tarea t WHERE t.id_proyecto=p.id_proyecto) AS tareas, " +
+                "(SELECT COUNT(*) FROM entrega e WHERE e.id_proyecto=p.id_proyecto) AS entregas, " +
+                "IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+                " JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+                "FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
+                "WHERE d.id_coordinador=@d ORDER BY d.id_docente, p.id_proyecto", idCoord);
+        }
+		// Alumnos 
+		static DataTable TablaId(string sql, int id)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var da = new MySqlDataAdapter(sql, cn);
+				da.SelectCommand.Parameters.AddWithValue("@i", id);
+				var dt = new DataTable();
+				da.Fill(dt);
+				return dt;
+			}
+		}
+
+		public static DataRow DatosAlumno(int idAl)
+		{ return TablaId("SELECT matricula, carrera, grado, grupo FROM alumno WHERE id_alumno=@i", idAl).Rows[0]; }
+
+		public static int ContarProyectosAlumno(int idAl)
+		{ return Escalar("SELECT COUNT(*) FROM alumno_proyecto WHERE id_alumno=@d", idAl); }
+
+		public static int TareasActivasAlumno(int idAl)
+		{
+			return Escalar(
+				"SELECT COUNT(*) FROM tarea t JOIN alumno_proyecto ap ON t.id_proyecto=ap.id_proyecto " +
+				"WHERE ap.id_alumno=@d AND t.estado<>'completada'", idAl);
+		}
+
+		public static int SubtareasPendientesAlumno(int idAl)
+		{
+			return Escalar(
+				"SELECT COUNT(*) FROM subtarea s JOIN tarea t ON s.id_tarea=t.id_tarea " +
+				"JOIN alumno_proyecto ap ON t.id_proyecto=ap.id_proyecto " +
+				"WHERE ap.id_alumno=@d AND s.estado<>'completada'", idAl);
+		}
+
+		public static DateTime? ProximaEntregaAlumno(int idAl)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var cmd = new MySqlCommand(
+					"SELECT MIN(e.fecha_limite) FROM entrega e " +
+					"JOIN alumno_proyecto ap ON e.id_proyecto=ap.id_proyecto " +
+					"WHERE ap.id_alumno=@d AND e.estado='pendiente'", cn);
+				cmd.Parameters.AddWithValue("@d", idAl);
+				object r = cmd.ExecuteScalar();
+				return r == DBNull.Value || r == null ? (DateTime?)null : Convert.ToDateTime(r);
+			}
+		}
+
+		public static DataTable ProyectosDeAlumno(int idAl)
+		{
+			return Tabla(
+				"SELECT p.id_proyecto, p.nombre, p.problematica, p.estado, p.fecha_inicio, p.fecha_fin, ap.rol, " +
+				"CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, " +
+				"(SELECT COUNT(DISTINCT x.id_alumno) FROM alumno_proyecto x WHERE x.id_proyecto=p.id_proyecto) AS alumnos, " +
+				"(SELECT COUNT(*) FROM tarea t WHERE t.id_proyecto=p.id_proyecto) AS tareas, " +
+				"(SELECT COUNT(*) FROM entrega e WHERE e.id_proyecto=p.id_proyecto) AS entregas, " +
+				"(SELECT COUNT(*) FROM subtarea s JOIN tarea t3 ON s.id_tarea=t3.id_tarea " +
+				" WHERE t3.id_proyecto=p.id_proyecto AND s.estado<>'completada') AS sub_pend, " +
+				"IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+				" JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+				"FROM alumno_proyecto ap JOIN proyecto p ON ap.id_proyecto=p.id_proyecto " +
+				"JOIN docente d ON p.id_docente=d.id_docente " +
+				"WHERE ap.id_alumno=@d ORDER BY p.id_proyecto", idAl);
+		}
+
+		public static DataTable SubtareasRecientesAlumno(int idAl)
+		{
+			return Tabla(
+				"SELECT s.titulo, t.prioridad, t.fecha_limite, p.nombre AS proyecto " +
+				"FROM subtarea s JOIN tarea t ON s.id_tarea=t.id_tarea " +
+				"JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+				"JOIN alumno_proyecto ap ON p.id_proyecto=ap.id_proyecto " +
+				"WHERE ap.id_alumno=@d AND s.estado<>'completada' " +
+				"ORDER BY t.fecha_limite LIMIT 3", idAl);
+		}
+
+		public static DataRow ProyectoDetalleAlumno(int idProyecto, int idAl)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var da = new MySqlDataAdapter(
+					"SELECT p.*, CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, ap.rol, " +
+					"IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
+					" JOIN tarea t2 ON s.id_tarea=t2.id_tarea WHERE t2.id_proyecto=p.id_proyecto),0) AS avance " +
+					"FROM proyecto p JOIN docente d ON p.id_docente=d.id_docente " +
+					"JOIN alumno_proyecto ap ON ap.id_proyecto=p.id_proyecto AND ap.id_alumno=@a " +
+					"WHERE p.id_proyecto=@p", cn);
+				da.SelectCommand.Parameters.AddWithValue("@a", idAl);
+				da.SelectCommand.Parameters.AddWithValue("@p", idProyecto);
+				var dt = new DataTable();
+				da.Fill(dt);
+				return dt.Rows[0];
+			}
+		}
+
+		public static DataTable EquipoDeProyecto(int idProyecto)
+		{
+			return TablaId(
+				"SELECT a.id_alumno, CONCAT(a.nombre,' ',a.apellido_paterno) AS nombre, a.matricula, ap.rol " +
+				"FROM alumno_proyecto ap JOIN alumno a ON ap.id_alumno=a.id_alumno " +
+				"WHERE ap.id_proyecto=@i ORDER BY ap.rol='líder' DESC, a.nombre", idProyecto);
+		}
+
+		public static DataTable EntregasDeProyecto(int idProyecto)
+		{
+			return TablaId(
+				"SELECT id_entrega, titulo, fecha_limite, estado FROM entrega " +
+				"WHERE id_proyecto=@i ORDER BY fecha_limite", idProyecto);
+		}
+
+		public static DataTable TareasDeProyecto(int idProyecto)
+		{
+			return TablaId(
+				"SELECT id_tarea, titulo, estado, prioridad, fecha_limite FROM tarea " +
+				"WHERE id_proyecto=@i ORDER BY fecha_limite", idProyecto);
+		}
+
+        //Alumno-tareas 
+        public static DataTable TareasDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT t.id_tarea, t.titulo, t.estado, t.prioridad, t.fecha_limite, " +
+                "p.id_proyecto, p.nombre AS proyecto, p.fecha_inicio, " +
+                "(SELECT COUNT(*) FROM subtarea s WHERE s.id_tarea=t.id_tarea) AS subtareas " +
+                "FROM tarea t JOIN alumno_proyecto ap ON t.id_proyecto=ap.id_proyecto " +
+                "JOIN proyecto p ON p.id_proyecto=t.id_proyecto " +
+                "WHERE ap.id_alumno=@d ORDER BY p.id_proyecto, t.fecha_limite", idAl);
+        }
+
+        public static DataRow TareaDetalle(int idTarea)
+        {
+            return TablaId(
+                "SELECT t.*, p.nombre AS proyecto, p.id_proyecto, p.fecha_inicio " +
+                "FROM tarea t JOIN proyecto p ON t.id_proyecto=p.id_proyecto " +
+                "WHERE t.id_tarea=@i", idTarea).Rows[0];
+        }
+
+        public static DataTable SubtareasDeTarea(int idTarea)
+        {
+            return TablaId(
+                "SELECT id_subtarea, titulo, estado FROM subtarea WHERE id_tarea=@i ORDER BY id_subtarea", idTarea);
+        }
+
+        // Sube el archivo como evidencia y marca la subtarea como completada
+        public static void CompletarSubtareaConArchivo(int idSubtarea, int idAlumno, string nombre, string ruta, string mime)
+
         {
             using (var cn = Conectar())
             {
                 cn.Open();
                 var cmd = new MySqlCommand(
+
                     "SELECT MIN(e.fecha_limite) FROM entrega e " +
                     "JOIN alumno_proyecto ap ON e.id_proyecto=ap.id_proyecto " +
                     "WHERE ap.id_alumno=@d AND e.estado='pendiente'", cn);
@@ -552,10 +758,73 @@ namespace SAPIENS_DEV.AccesoDatos
         }
 
         public static DataRow ProyectoDetalleAlumno(int idProyecto, int idAl)
+
+                    "INSERT INTO archivo(nombre_archivo, url, tipo_mime, id_entrega, id_alumno, id_subtarea) " +
+                    "VALUES(@n, @u, @m, NULL, @a, @s)", cn);
+                cmd.Parameters.AddWithValue("@n", nombre);
+                cmd.Parameters.AddWithValue("@u", ruta);
+                cmd.Parameters.AddWithValue("@m", mime);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("UPDATE subtarea SET estado='completada' WHERE id_subtarea=@s", cn);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("INSERT IGNORE INTO alumno_subtarea(id_alumno, id_subtarea) VALUES(@a, @s)", cn);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("SELECT id_tarea FROM subtarea WHERE id_subtarea=@s", cn);
+                cmd.Parameters.AddWithValue("@s", idSubtarea);
+                int idTarea = Convert.ToInt32(cmd.ExecuteScalar());
+
+                cmd = new MySqlCommand(
+                    "UPDATE tarea SET estado = IF((SELECT COUNT(*) FROM subtarea " +
+                    "WHERE id_tarea=@t AND estado<>'completada')=0,'completada','en progreso') WHERE id_tarea=@t", cn);
+                cmd.Parameters.AddWithValue("@t", idTarea);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        //Alumno- Entrega
+        public static DataTable EntregasDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT e.id_entrega, e.titulo, e.fecha_limite, e.estado, " +
+                "p.id_proyecto, p.nombre AS proyecto, p.fecha_inicio, " +
+                "(SELECT COUNT(*) FROM archivo ar WHERE ar.id_entrega=e.id_entrega AND ar.id_alumno=@d) AS ya_envie " +
+                "FROM entrega e JOIN alumno_proyecto ap ON e.id_proyecto=ap.id_proyecto " +
+                "JOIN proyecto p ON p.id_proyecto=e.id_proyecto " +
+                "WHERE ap.id_alumno=@d ORDER BY p.id_proyecto, e.fecha_limite", idAl);
+        }
+
+        public static DataRow EntregaDetalle(int idEntrega)
+        {
+            return TablaId(
+                "SELECT e.*, p.nombre AS proyecto, p.id_proyecto, p.fecha_inicio, " +
+                "CONCAT(d.nombre,' ',d.apellido_paterno) AS docente " +
+                "FROM entrega e JOIN proyecto p ON e.id_proyecto=p.id_proyecto " +
+                "JOIN docente d ON p.id_docente=d.id_docente WHERE e.id_entrega=@i", idEntrega).Rows[0];
+        }
+
+        public static DataTable ArchivosDeEntrega(int idEntrega)
+        {
+            return TablaId(
+                "SELECT ar.nombre_archivo, ar.fecha_subida, CONCAT(a.nombre,' ',a.apellido_paterno) AS alumno " +
+                "FROM archivo ar JOIN alumno a ON ar.id_alumno=a.id_alumno " +
+                "WHERE ar.id_entrega=@i ORDER BY ar.fecha_subida DESC", idEntrega);
+        }
+
+        public static void SubirArchivoEntrega(string nombre, string ruta, string mime, int idEntrega, int idAlumno)
+
         {
             using (var cn = Conectar())
             {
                 cn.Open();
+
                 var da = new MySqlDataAdapter(
                     "SELECT p.*, CONCAT(d.nombre,' ',d.apellido_paterno) AS docente, ap.rol, " +
                     "IFNULL((SELECT ROUND(SUM(s.estado='completada')*100/COUNT(*)) FROM subtarea s " +
@@ -592,5 +861,43 @@ namespace SAPIENS_DEV.AccesoDatos
                 "SELECT id_tarea, titulo, estado, prioridad, fecha_limite FROM tarea " +
                 "WHERE id_proyecto=@i ORDER BY fecha_limite", idProyecto);
         }
+
+                var cmd = new MySqlCommand(
+                    "INSERT INTO archivo(nombre_archivo, url, tipo_mime, id_entrega, id_alumno) " +
+                    "VALUES(@n, @u, @m, @e, @a)", cn);
+                cmd.Parameters.AddWithValue("@n", nombre);
+                cmd.Parameters.AddWithValue("@u", ruta);
+                cmd.Parameters.AddWithValue("@m", mime);
+                cmd.Parameters.AddWithValue("@e", idEntrega);
+                cmd.Parameters.AddWithValue("@a", idAlumno);
+                cmd.ExecuteNonQuery();
+
+                cmd = new MySqlCommand("UPDATE entrega SET estado='entregada' WHERE id_entrega=@e", cn);
+                cmd.Parameters.AddWithValue("@e", idEntrega);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        //Alumno-Notificaciones 
+        public static DataTable NotificacionesDeAlumno(int idAl)
+        {
+            return Tabla(
+                "SELECT mensaje, tipo, fecha, leida FROM notificacion " +
+                "WHERE id_alumno=@d ORDER BY leida, fecha DESC, id_notificacion DESC", idAl);
+        }
+
+        public static void MarcarNotificacionesLeidas(int idAl)
+        {
+            using (var cn = Conectar())
+            {
+                cn.Open();
+                var cmd = new MySqlCommand("UPDATE notificacion SET leida=1 WHERE id_alumno=@a", cn);
+                cmd.Parameters.AddWithValue("@a", idAl);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+
     }
 }

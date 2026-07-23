@@ -132,17 +132,113 @@
     <Compile Include="Logins\FrmRegistroDocente.Designer.cs">
       <DependentUpon>FrmRegistroDocente.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasAlumno\FrmDashboardAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDashboardAlumno.Designer.cs">
+      <DependentUpon>FrmDashboardAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleEntregaAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleEntregaAlumno.Designer.cs">
+      <DependentUpon>FrmDetalleEntregaAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleProyectoAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleProyectoAlumno.Designer.cs">
+      <DependentUpon>FrmDetalleProyectoAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleTareaAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleTareaAlumno.Designer.cs">
+      <DependentUpon>FrmDetalleTareaAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmEntregasAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmEntregasAlumno.Designer.cs">
+      <DependentUpon>FrmEntregasAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmMenuAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmMenuAlumno.Designer.cs">
+      <DependentUpon>FrmMenuAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmNotificacionesAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmNotificacionesAlumno.Designer.cs">
+      <DependentUpon>FrmNotificacionesAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmProyectosAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmProyectosAlumno.Designer.cs">
+      <DependentUpon>FrmProyectosAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmTareasAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmTareasAlumno.Designer.cs">
+      <DependentUpon>FrmTareasAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmDocentesCoord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmDocentesCoord.Designer.cs">
+      <DependentUpon>FrmDocentesCoord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmMenuCoordinador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmMenuCoordinador.Designer.cs">
+      <DependentUpon>FrmMenuCoordinador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmProyectosCoord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmProyectosCoord.Designer.cs">
+      <DependentUpon>FrmProyectosCoord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmRendimientoCoord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasCoordinador\FrmRendimientoCoord.Designer.cs">
+      <DependentUpon>FrmRendimientoCoord.cs</DependentUpon>
+    </Compile>
     <Compile Include="PantallasDocente\FrmDashboardDocente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PantallasDocente\FrmDashboardDocente.Designer.cs">
       <DependentUpon>FrmDashboardDocente.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasDocente\FrmEntregasDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmEntregasDocente.Designer.cs">
+      <DependentUpon>FrmEntregasDocente.cs</DependentUpon>
+    </Compile>
     <Compile Include="PantallasDocente\FrmMenuDocente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PantallasDocente\FrmMenuDocente.Designer.cs">
       <DependentUpon>FrmMenuDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmNotificacionesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmNotificacionesDocente.Designer.cs">
+      <DependentUpon>FrmNotificacionesDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmNuevaEntrega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmNuevaEntrega.Designer.cs">
+      <DependentUpon>FrmNuevaEntrega.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallasDocente\FrmNuevaTarea.cs">
       <SubType>Form</SubType>
@@ -161,6 +257,12 @@
     </Compile>
     <Compile Include="PantallasDocente\FrmProyectosDocente.Designer.cs">
       <DependentUpon>FrmProyectosDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmReportesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasDocente\FrmReportesDocente.Designer.cs">
+      <DependentUpon>FrmReportesDocente.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallasDocente\FrmTareasDocente.cs">
       <SubType>Form</SubType>
@@ -185,6 +287,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Actividad\Avance POO.docx" />
+    <None Include="Actividad\CRUD.docx" />
     <None Include="GUIA DE ESTILOS\Actividad De Aprendizaje 4 %281%29.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -168,6 +168,12 @@
     <Compile Include="PantallasAlumno\FrmMenuAlumno.Designer.cs">
       <DependentUpon>FrmMenuAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasAlumno\FrmNotificacionesAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmNotificacionesAlumno.Designer.cs">
+      <DependentUpon>FrmNotificacionesAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="PantallasAlumno\FrmProyectosAlumno.cs">
       <SubType>Form</SubType>
     </Compile>

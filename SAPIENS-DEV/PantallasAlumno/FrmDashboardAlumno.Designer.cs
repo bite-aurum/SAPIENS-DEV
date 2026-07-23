@@ -164,7 +164,7 @@
 			this.lnkVerProyectos.Size = new System.Drawing.Size(90, 18);
 			this.lnkVerProyectos.Text = "Ver todos";
 			this.lnkVerProyectos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			//this.lnkVerProyectos.Click += new System.EventHandler(this.lnkVerProyectos_Click);
+			this.lnkVerProyectos.Click += new System.EventHandler(this.lnkVerProyectos_Click);
 			// flpProyectos
 			this.flpProyectos.AutoScroll = true;
 			this.flpProyectos.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -184,7 +184,7 @@
 			this.lnkVerTareas.Size = new System.Drawing.Size(90, 18);
 			this.lnkVerTareas.Text = "Ver todas";
 			this.lnkVerTareas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			//this.lnkVerTareas.Click += new System.EventHandler(this.lnkVerTareas_Click);
+			this.lnkVerTareas.Click += new System.EventHandler(this.lnkVerTareas_Click);
 			// flpDerecha
 			this.flpDerecha.AutoScroll = true;
 			this.flpDerecha.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;

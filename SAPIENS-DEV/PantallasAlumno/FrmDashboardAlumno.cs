@@ -73,7 +73,7 @@ namespace SAPIENS_DEV.PantallasAlumno
 					Margin = new Padding(0, 14, 0, 6)
 				});
 
-				/*DataTable dn = Db.NotificacionesDeAlumno(Db.IdUsuario);
+				DataTable dn = Db.NotificacionesDeAlumno(Db.IdUsuario);
 				int i = 0;
 				foreach (DataRow r in dn.Rows) { if (i++ == 2) break; flpDerecha.Controls.Add(FilaNotif(r)); }
 				if (dn.Rows.Count == 0)
@@ -82,7 +82,7 @@ namespace SAPIENS_DEV.PantallasAlumno
 						Text = "Sin notificaciones.",
 						AutoSize = true,
 						ForeColor = Color.FromArgb(107, 114, 128)
-					});*/
+					});
 			}
 			catch (Exception ex)
 			{
@@ -152,7 +152,7 @@ namespace SAPIENS_DEV.PantallasAlumno
 				Size = new Size(400, 16)
 			});
 
-			//Clickeable(card, (s, e) => menu.IrDetalleProyecto(idProy, nombre));
+			Clickeable(card, (s, e) => menu.IrDetalleProyecto(idProy, nombre));
 			return card;
 		}
 
@@ -226,8 +226,8 @@ namespace SAPIENS_DEV.PantallasAlumno
 			return card;
 		}
 
-		//private void lnkVerProyectos_Click(object sender, EventArgs e) { menu.IrProyectos(); }
-		//private void lnkVerTareas_Click(object sender, EventArgs e) { menu.IrTareas(); }
+		private void lnkVerProyectos_Click(object sender, EventArgs e) { menu.IrProyectos(); }
+		private void lnkVerTareas_Click(object sender, EventArgs e) { menu.IrTareas(); }
 
 		private void pnlCard_Paint(object sender, PaintEventArgs e)
 		{

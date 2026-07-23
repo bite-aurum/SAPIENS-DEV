@@ -154,7 +154,7 @@
 			this.btnNotificaciones.Text = "   🔔  Notificaciones";
 			this.btnNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnNotificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
-			//this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
+			this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
 			// btnConfiguracion
 			this.btnConfiguracion.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

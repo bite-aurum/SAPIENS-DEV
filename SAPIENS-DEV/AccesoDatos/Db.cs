@@ -778,7 +778,56 @@ namespace SAPIENS_DEV.AccesoDatos
                 cmd.ExecuteNonQuery();
             }
         }
+		// Configuracion
+		// La tabla y su columna id se deducen del rol de la sesión
+		static string TablaSesion() { return Rol; }                 // "coordinador" / "docente" / "alumno"
+		static string ColIdSesion() { return "id_" + Rol; }
+
+		public static DataRow PerfilUsuario()
+		{
+			return TablaId("SELECT * FROM " + TablaSesion() + " WHERE " + ColIdSesion() + "=@i", IdUsuario).Rows[0];
+		}
+
+		public static void ActualizarPerfil(string nom, string apP, string apM, string correo)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var cmd = new MySqlCommand(
+					"UPDATE " + TablaSesion() + " SET nombre=@n, apellido_paterno=@ap, apellido_materno=@am, correo=@c " +
+					"WHERE " + ColIdSesion() + "=@i", cn);
+				cmd.Parameters.AddWithValue("@n", nom);
+				cmd.Parameters.AddWithValue("@ap", apP);
+				cmd.Parameters.AddWithValue("@am", apM);
+				cmd.Parameters.AddWithValue("@c", correo);
+				cmd.Parameters.AddWithValue("@i", IdUsuario);
+				cmd.ExecuteNonQuery();
+				NombreUsuario = nom;
+			}
+		}
+
+		// true si la contraseña actual era correcta y se cambió
+		public static bool CambiarContrasena(string actual, string nueva)
+		{
+			using (var cn = Conectar())
+			{
+				cn.Open();
+				var cmd = new MySqlCommand(
+					"SELECT COUNT(*) FROM " + TablaSesion() + " WHERE " + ColIdSesion() + "=@i AND contrasena=@p", cn);
+				cmd.Parameters.AddWithValue("@i", IdUsuario);
+				cmd.Parameters.AddWithValue("@p", Hash(actual));
+				if (Convert.ToInt32(cmd.ExecuteScalar()) == 0) return false;
+
+				cmd = new MySqlCommand(
+					"UPDATE " + TablaSesion() + " SET contrasena=@p WHERE " + ColIdSesion() + "=@i", cn);
+				cmd.Parameters.AddWithValue("@p", Hash(nueva));
+				cmd.Parameters.AddWithValue("@i", IdUsuario);
+				cmd.ExecuteNonQuery();
+				return true;
+			}
+		}
 
 
-    }
+
+	}
 }

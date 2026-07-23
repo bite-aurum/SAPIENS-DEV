@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.Compartido;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,11 @@ namespace SAPIENS_DEV.PantallasDocente
 		{
 			InitializeComponent();
 			login = frmLogin;
+		}
+		public void CerrarSesion()
+		{
+			login.Show();
+			Close();
 		}
 		private void FrmMenuDocente_Load(object sender, EventArgs e)
 		{
@@ -72,8 +78,7 @@ namespace SAPIENS_DEV.PantallasDocente
 
 		private void btnConfiguracion_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("¿Cerrar sesión?", "SAPIENS", MessageBoxButtons.YesNo) == DialogResult.Yes)
-			{ login.Show(); Close(); }
+			Navegar(new FrmConfiguracion(CerrarSesion), "Configuración", null);
 		}
 
 		private void pnlMenu_Paint(object sender, PaintEventArgs e)

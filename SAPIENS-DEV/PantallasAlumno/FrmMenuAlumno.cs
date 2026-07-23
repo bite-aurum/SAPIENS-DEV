@@ -74,22 +74,22 @@ namespace SAPIENS_DEV.PantallasAlumno
 		}
 
 		public void IrProyectos() { Navegar(new FrmProyectosAlumno(this), "Mis proyectos", "", btnProyectos); }
-		//public void IrTareas() { Navegar(new FrmTareasAlumno(this), "Mis tareas", "", btnTareas); }
+		public void IrTareas() { Navegar(new FrmTareasAlumno(this), "Mis tareas", "", btnTareas); }
 		//public void IrEntregas() { Navegar(new FrmEntregasAlumno(this), "Mis entregas", "", btnEntregas); }
 		//public void IrNotificaciones() { Navegar(new FrmNotificacionesAlumno(this), "Notificaciones", "", btnNotificaciones); }
 
 		public void IrDetalleProyecto(int idProyecto, string nombre)
 		{ Navegar(new FrmDetalleProyectoAlumno(this, idProyecto), nombre, "", btnProyectos); }
 
-		//public void IrDetalleTarea(int idTarea, string titulo)
-		//{ Navegar(new FrmDetalleTareaAlumno(this, idTarea), titulo, "", btnTareas); }
+		public void IrDetalleTarea(int idTarea, string titulo)
+		{ Navegar(new FrmDetalleTareaAlumno(this, idTarea), titulo, "", btnTareas); }
 
 		//public void IrDetalleEntrega(int idEntrega, string titulo)
 		//{ Navegar(new FrmDetalleEntregaAlumno(this, idEntrega), titulo, "", btnEntregas); }
 
 		private void btnDashboard_Click(object sender, EventArgs e) { IrDashboard(); }
 		private void btnProyectos_Click(object sender, EventArgs e) { IrProyectos(); }
-		//private void btnTareas_Click(object sender, EventArgs e) { IrTareas(); }
+		private void btnTareas_Click(object sender, EventArgs e) { IrTareas(); }
 		//private void btnEntregas_Click(object sender, EventArgs e) { IrEntregas(); }
 		//private void btnNotificaciones_Click(object sender, EventArgs e) { IrNotificaciones(); }
 

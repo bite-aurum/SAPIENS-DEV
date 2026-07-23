@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.Compartido;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,8 +21,13 @@ namespace SAPIENS_DEV.PantallasCoordinador
             InitializeComponent();
             login = frmLogin;
         }
+		public void CerrarSesion()
+		{
+			login.Show();
+			Close();
+		}
 
-        private void FrmMenuCoordinador_Load(object sender, EventArgs e)
+		private void FrmMenuCoordinador_Load(object sender, EventArgs e)
         {
             lblEstadoIzq.Text = "   Rol: Coordinador · " + Db.NombreUsuario;
             lblSubtitulo.Text = Db.NombreUsuario + " · COORD-" + Db.IdUsuario.ToString("D3");
@@ -61,13 +67,12 @@ namespace SAPIENS_DEV.PantallasCoordinador
         private void btnDocentes_Click(object sender, EventArgs e) { IrDocentes(); }
         private void btnProyectos_Click(object sender, EventArgs e) { IrProyectos(); }
 
-        private void btnConfiguracion_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Cerrar sesión?", "SAPIENS", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            { login.Show(); Close(); }
-        }
+		private void btnConfiguracion_Click(object sender, EventArgs e)
+		{
+			Navegar(new FrmConfiguracion(CerrarSesion), "Configuración", null);
+		}
 
-        private void pnlMenu_Paint(object sender, PaintEventArgs e)
+		private void pnlMenu_Paint(object sender, PaintEventArgs e)
         {
             using (var p = new Pen(Color.FromArgb(229, 231, 235)))
                 e.Graphics.DrawLine(p, pnlMenu.Width - 1, 0, pnlMenu.Width - 1, pnlMenu.Height);
@@ -78,5 +83,6 @@ namespace SAPIENS_DEV.PantallasCoordinador
             using (var p = new Pen(Color.FromArgb(229, 231, 235)))
                 e.Graphics.DrawLine(p, 0, pnlHeader.Height - 1, pnlHeader.Width, pnlHeader.Height - 1);
         }
+
     }
 }

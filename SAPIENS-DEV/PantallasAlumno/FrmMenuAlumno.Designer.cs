@@ -132,7 +132,7 @@
 			this.btnTareas.Text = "   ✅  Mis tareas";
 			this.btnTareas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnTareas.Cursor = System.Windows.Forms.Cursors.Hand;
-			//this.btnTareas.Click += new System.EventHandler(this.btnTareas_Click);
+			this.btnTareas.Click += new System.EventHandler(this.btnTareas_Click);
 			// btnEntregas
 			this.btnEntregas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnEntregas.FlatAppearance.BorderSize = 0;

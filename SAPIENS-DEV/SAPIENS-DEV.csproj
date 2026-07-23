@@ -144,6 +144,12 @@
     <Compile Include="PantallasAlumno\FrmDetalleProyectoAlumno.Designer.cs">
       <DependentUpon>FrmDetalleProyectoAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleTareaAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmDetalleTareaAlumno.Designer.cs">
+      <DependentUpon>FrmDetalleTareaAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="PantallasAlumno\FrmMenuAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,12 @@
     </Compile>
     <Compile Include="PantallasAlumno\FrmProyectosAlumno.Designer.cs">
       <DependentUpon>FrmProyectosAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmTareasAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallasAlumno\FrmTareasAlumno.Designer.cs">
+      <DependentUpon>FrmTareasAlumno.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallasCoordinador\FrmDocentesCoord.cs">
       <SubType>Form</SubType>

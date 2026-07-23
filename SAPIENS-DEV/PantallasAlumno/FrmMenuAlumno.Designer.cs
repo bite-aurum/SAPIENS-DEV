@@ -143,7 +143,7 @@
 			this.btnEntregas.Text = "   📤  Mis entregas";
 			this.btnEntregas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnEntregas.Cursor = System.Windows.Forms.Cursors.Hand;
-			//this.btnEntregas.Click += new System.EventHandler(this.btnEntregas_Click);
+			this.btnEntregas.Click += new System.EventHandler(this.btnEntregas_Click);
 			// btnNotificaciones
 			this.btnNotificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnNotificaciones.FlatAppearance.BorderSize = 0;

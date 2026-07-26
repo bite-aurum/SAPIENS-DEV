@@ -273,18 +273,18 @@
 			this.lblHintTema.Text = "Cambia la apariencia del sistema";
 			// chkNotifs
 			this.chkNotifs.AutoSize = true;
-			this.chkNotifs.Checked = true;
 			this.chkNotifs.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
 			this.chkNotifs.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
 			this.chkNotifs.Location = new System.Drawing.Point(30, 95);
-			this.chkNotifs.Text = "Notificaciones del sistema";
+			this.chkNotifs.Text = "Activar accesibilidad";
 			this.chkNotifs.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.chkNotifs.CheckedChanged += new System.EventHandler(this.chkNotifs_CheckedChanged);
 			// lblHintNotifs
 			this.lblHintNotifs.Font = new System.Drawing.Font("Segoe UI", 7.5F);
 			this.lblHintNotifs.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.lblHintNotifs.Location = new System.Drawing.Point(48, 117);
 			this.lblHintNotifs.Size = new System.Drawing.Size(300, 15);
-			this.lblHintNotifs.Text = "Recibir alertas y recordatorios";
+			this.lblHintNotifs.Text = "Al pasar el puntero por un botón, dice en voz alta qué es";
 			// btnCerrarSesion (borde rojo error según guía)
 			this.btnCerrarSesion.BackColor = System.Drawing.Color.White;
 			this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(239, 68, 68);

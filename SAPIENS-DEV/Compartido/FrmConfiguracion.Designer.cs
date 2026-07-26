@@ -62,6 +62,8 @@
 			this.lblHintTema = new System.Windows.Forms.Label();
 			this.chkNotifs = new System.Windows.Forms.CheckBox();
 			this.lblHintNotifs = new System.Windows.Forms.Label();
+			this.chkTextoGrande = new System.Windows.Forms.CheckBox();
+			this.lblHintTexto = new System.Windows.Forms.Label();
 			this.btnCerrarSesion = new System.Windows.Forms.Button();
 			this.btnGuardar = new System.Windows.Forms.Button();
 			this.pnlPerfil.SuspendLayout();
@@ -244,12 +246,14 @@
 			// pnlPref
 			this.pnlPref.BackColor = System.Drawing.Color.White;
 			this.pnlPref.Location = new System.Drawing.Point(24, 527);
-			this.pnlPref.Size = new System.Drawing.Size(700, 140);
+			this.pnlPref.Size = new System.Drawing.Size(700, 190);
 			this.pnlPref.Controls.Add(this.lblSecPref);
 			this.pnlPref.Controls.Add(this.chkTema);
 			this.pnlPref.Controls.Add(this.lblHintTema);
 			this.pnlPref.Controls.Add(this.chkNotifs);
 			this.pnlPref.Controls.Add(this.lblHintNotifs);
+			this.pnlPref.Controls.Add(this.chkTextoGrande);
+			this.pnlPref.Controls.Add(this.lblHintTexto);
 			this.pnlPref.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCard_Paint);
 			// lblSecPref
 			this.lblSecPref.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -285,6 +289,20 @@
 			this.lblHintNotifs.Location = new System.Drawing.Point(48, 117);
 			this.lblHintNotifs.Size = new System.Drawing.Size(300, 15);
 			this.lblHintNotifs.Text = "Al pasar el puntero por un botón, dice en voz alta qué es";
+			// chkTextoGrande
+			this.chkTextoGrande.AutoSize = true;
+			this.chkTextoGrande.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+			this.chkTextoGrande.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
+			this.chkTextoGrande.Location = new System.Drawing.Point(30, 142);
+			this.chkTextoGrande.Text = "Texto grande";
+			this.chkTextoGrande.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.chkTextoGrande.CheckedChanged += new System.EventHandler(this.chkTextoGrande_CheckedChanged);
+			// lblHintTexto
+			this.lblHintTexto.Font = new System.Drawing.Font("Segoe UI", 7.5F);
+			this.lblHintTexto.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
+			this.lblHintTexto.Location = new System.Drawing.Point(48, 164);
+			this.lblHintTexto.Size = new System.Drawing.Size(400, 15);
+			this.lblHintTexto.Text = "Agranda las letras de toda la aplicación";
 			// btnCerrarSesion (borde rojo error según guía)
 			this.btnCerrarSesion.BackColor = System.Drawing.Color.White;
 			this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(239, 68, 68);
@@ -292,7 +310,7 @@
 			this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.btnCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(239, 68, 68);
-			this.btnCerrarSesion.Location = new System.Drawing.Point(24, 685);
+			this.btnCerrarSesion.Location = new System.Drawing.Point(24, 730);
 			this.btnCerrarSesion.Size = new System.Drawing.Size(150, 40);
 			this.btnCerrarSesion.Text = "⇥  Cerrar sesión";
 			this.btnCerrarSesion.UseVisualStyleBackColor = false;
@@ -304,7 +322,7 @@
 			this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
 			this.btnGuardar.ForeColor = System.Drawing.Color.White;
-			this.btnGuardar.Location = new System.Drawing.Point(554, 685);
+			this.btnGuardar.Location = new System.Drawing.Point(554, 730);
 			this.btnGuardar.Size = new System.Drawing.Size(170, 40);
 			this.btnGuardar.Text = "💾  Guardar cambios";
 			this.btnGuardar.UseVisualStyleBackColor = false;
@@ -363,6 +381,8 @@
 		private System.Windows.Forms.Label lblHintTema;
 		private System.Windows.Forms.CheckBox chkNotifs;
 		private System.Windows.Forms.Label lblHintNotifs;
+		private System.Windows.Forms.CheckBox chkTextoGrande;
+		private System.Windows.Forms.Label lblHintTexto;
 		private System.Windows.Forms.Button btnCerrarSesion;
 		private System.Windows.Forms.Button btnGuardar;
 

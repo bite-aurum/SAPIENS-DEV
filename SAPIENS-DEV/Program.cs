@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAPIENS_DEV.Logins;
+using SAPIENS_DEV.Compartido;
 namespace SAPIENS_DEV
 {
 	internal static class Program
@@ -16,6 +17,7 @@ namespace SAPIENS_DEV
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			Accesibilidad.Iniciar(); // enciende la accesibilidad para todas las pantallas
 			Application.Run(new FrmLogin());
 		}
 	}

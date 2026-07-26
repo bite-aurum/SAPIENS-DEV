@@ -22,6 +22,15 @@ namespace SAPIENS_DEV.Compartido
 		{
 			InitializeComponent();
 			cerrarSesion = accionCerrarSesion;
+
+			chkNotifs.Checked = Accesibilidad.Activada;
+		}
+
+		private void chkNotifs_CheckedChanged(object sender, EventArgs e)
+		{
+			Accesibilidad.Activada = chkNotifs.Checked;
+			if (chkNotifs.Checked)
+				Accesibilidad.Decir("Accesibilidad activada");
 		}
 
 		private void FrmConfiguracion_Load(object sender, EventArgs e)

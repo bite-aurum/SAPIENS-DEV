@@ -24,6 +24,7 @@ namespace SAPIENS_DEV.Compartido
 			cerrarSesion = accionCerrarSesion;
 
 			chkNotifs.Checked = Accesibilidad.Activada;
+			chkTextoGrande.Checked = Accesibilidad.TextoGrande;
 		}
 
 		private void chkNotifs_CheckedChanged(object sender, EventArgs e)
@@ -31,6 +32,12 @@ namespace SAPIENS_DEV.Compartido
 			Accesibilidad.Activada = chkNotifs.Checked;
 			if (chkNotifs.Checked)
 				Accesibilidad.Decir("Accesibilidad activada");
+		}
+
+		// Enciende o apaga el texto grande de toda la app.
+		private void chkTextoGrande_CheckedChanged(object sender, EventArgs e)
+		{
+			Accesibilidad.TextoGrande = chkTextoGrande.Checked;
 		}
 
 		private void FrmConfiguracion_Load(object sender, EventArgs e)

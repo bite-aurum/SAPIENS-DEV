@@ -229,7 +229,7 @@
             this.btnBuscarAgregar.ForeColor = System.Drawing.Color.FromArgb(79, 70, 229);
             this.btnBuscarAgregar.Location = new System.Drawing.Point(30, 165);
             this.btnBuscarAgregar.Size = new System.Drawing.Size(180, 32);
-            this.btnBuscarAgregar.Text = "🔍  Buscar y agregar";
+            this.btnBuscarAgregar.Text = "Buscar y agregar";
             this.btnBuscarAgregar.UseVisualStyleBackColor = false;
             this.btnBuscarAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarAgregar.Click += new System.EventHandler(this.btnBuscarAgregar_Click);
@@ -260,7 +260,7 @@
             this.btnQuitar.ForeColor = System.Drawing.Color.FromArgb(239, 68, 68);
             this.btnQuitar.Location = new System.Drawing.Point(300, 188);
             this.btnQuitar.Size = new System.Drawing.Size(370, 28);
-            this.btnQuitar.Text = "🗑  Quitar seleccionado";
+            this.btnQuitar.Text = "Quitar seleccionado";
             this.btnQuitar.UseVisualStyleBackColor = false;
             this.btnQuitar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
@@ -273,7 +273,7 @@
             this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
             this.btnCancelar.Location = new System.Drawing.Point(24, 760);
             this.btnCancelar.Size = new System.Drawing.Size(140, 40);
-            this.btnCancelar.Text = "✕  Cancelar";
+            this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -285,7 +285,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
             this.btnGuardar.Location = new System.Drawing.Point(544, 760);
             this.btnGuardar.Size = new System.Drawing.Size(180, 40);
-            this.btnGuardar.Text = "💾  Guardar proyecto";
+            this.btnGuardar.Text = "Guardar proyecto";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);

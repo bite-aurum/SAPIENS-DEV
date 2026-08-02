@@ -25,6 +25,24 @@ namespace SAPIENS_DEV.Compartido
 
 			chkNotifs.Checked = Accesibilidad.Activada;
 			chkTextoGrande.Checked = Accesibilidad.TextoGrande;
+
+			CargarIconos();
+		}
+
+		// Pone los iconos PNG en cada btn
+		// pintados del color que le toca a cada uno 
+		private void CargarIconos()
+		{
+			Color gris = Color.FromArgb(75, 85, 99);
+			Color indigo = Color.FromArgb(79, 70, 229);
+			Color rojo = Color.FromArgb(239, 68, 68);
+
+			btnOjo1.Image = Iconos.Cargar("ojo", gris, 16);
+			btnOjo2.Image = Iconos.Cargar("ojo", gris, 16);
+			btnOjo3.Image = Iconos.Cargar("ojo", gris, 16);
+			btnActualizarPass.Image = Iconos.Cargar("candado", indigo, 16);
+			btnCerrarSesion.Image = Iconos.Cargar("salir", rojo, 24);
+			btnGuardar.Image = Iconos.Cargar("guardar", Color.White, 24);
 		}
 
 		private void chkNotifs_CheckedChanged(object sender, EventArgs e)

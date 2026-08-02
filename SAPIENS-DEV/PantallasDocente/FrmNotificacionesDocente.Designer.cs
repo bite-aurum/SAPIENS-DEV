@@ -175,7 +175,7 @@
 			this.btnEnviar.ForeColor = System.Drawing.Color.White;
 			this.btnEnviar.Location = new System.Drawing.Point(30, 445);
 			this.btnEnviar.Size = new System.Drawing.Size(420, 40);
-			this.btnEnviar.Text = "📨  Enviar notificación";
+			this.btnEnviar.Text = "Enviar notificación";
 			this.btnEnviar.UseVisualStyleBackColor = false;
 			this.btnEnviar.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);

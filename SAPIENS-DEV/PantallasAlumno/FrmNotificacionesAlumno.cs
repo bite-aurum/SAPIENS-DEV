@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using SAPIENS_DEV.PantallasDocente;
 using System;
@@ -20,6 +21,9 @@ namespace SAPIENS_DEV.PantallasAlumno
         {
             InitializeComponent();
             menu = m;
+
+            // Icono del botn, con el mismo color que tenia.
+            Iconos.EnBotonTexto(btnMarcarTodas, "check", Color.FromArgb(31, 41, 55));
         }
 
         private void FrmNotificacionesAlumno_Load(object sender, EventArgs e)
@@ -93,18 +97,17 @@ namespace SAPIENS_DEV.PantallasAlumno
                 Size = new Size(16, 16)
             });
 
-            string ico = tipo == "alerta" ? "⚠" : tipo == "recordatorio" ? "🕐" : "ⓘ";
+            string icoNombre = tipo == "alerta" ? "advertencia" : tipo == "recordatorio" ? "reloj" : "info";
             Color icoColor = tipo == "alerta" ? Color.FromArgb(239, 68, 68)
                            : tipo == "recordatorio" ? Color.FromArgb(245, 158, 11)
                            : Color.FromArgb(16, 185, 129);
-            card.Controls.Add(new Label
+            var lblIco = new Label
             {
-                Text = ico,
-                ForeColor = icoColor,
-                Font = new Font("Segoe UI", 11F),
                 Location = new Point(36, 16),
                 Size = new Size(26, 24)
-            });
+            };
+            Iconos.EnLabel(lblIco, icoNombre, icoColor, 24);
+            card.Controls.Add(lblIco);
 
             card.Controls.Add(new Label
             {

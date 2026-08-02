@@ -119,7 +119,7 @@
             this.btnGenerar.ForeColor = System.Drawing.Color.FromArgb(79, 70, 229);
             this.btnGenerar.Location = new System.Drawing.Point(30, 225);
             this.btnGenerar.Size = new System.Drawing.Size(380, 40);
-            this.btnGenerar.Text = "📊  Generar reporte";
+            this.btnGenerar.Text = "Generar reporte";
             this.btnGenerar.UseVisualStyleBackColor = false;
             this.btnGenerar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
@@ -151,7 +151,7 @@
             this.btnDescargar.ForeColor = System.Drawing.Color.White;
             this.btnDescargar.Location = new System.Drawing.Point(30, 220);
             this.btnDescargar.Size = new System.Drawing.Size(380, 40);
-            this.btnDescargar.Text = "⬇  Descargar reporte";
+            this.btnDescargar.Text = "Descargar reporte";
             this.btnDescargar.UseVisualStyleBackColor = false;
             this.btnDescargar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDescargar.Click += new System.EventHandler(this.btnDescargar_Click);

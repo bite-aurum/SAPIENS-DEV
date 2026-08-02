@@ -20,6 +20,16 @@ namespace SAPIENS_DEV.PantallasDocente
 		{
 			InitializeComponent();
 			login = frmLogin;
+
+			// Iconos del menú gris, 24px, mismo color que tenia.
+			Color gris = Color.FromArgb(107, 114, 128);
+			Iconos.EnBoton(btnDashboard, "casa", gris);
+			Iconos.EnBoton(btnProyectos, "carpeta", gris);
+			Iconos.EnBoton(btnTareas, "check", gris);
+			Iconos.EnBoton(btnEntregas, "enviar", gris);
+			Iconos.EnBoton(btnReportes, "grafica", gris);
+			Iconos.EnBoton(btnNotificaciones, "campana", gris);
+			Iconos.EnBoton(btnConfiguracion, "engrane", gris);
 		}
 		public void CerrarSesion()
 		{

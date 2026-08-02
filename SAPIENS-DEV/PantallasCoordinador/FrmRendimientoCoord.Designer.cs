@@ -83,7 +83,7 @@
             this.lblIcoProyectos.ForeColor = System.Drawing.Color.FromArgb(16, 185, 129);
             this.lblIcoProyectos.Location = new System.Drawing.Point(175, 30);
             this.lblIcoProyectos.Size = new System.Drawing.Size(36, 32);
-            this.lblIcoProyectos.Text = "📁";
+            this.lblIcoProyectos.Text = "";
             // pnlCard2 — Docentes activos
             this.pnlCard2.BackColor = System.Drawing.Color.White;
             this.pnlCard2.Location = new System.Drawing.Point(264, 24);
@@ -106,7 +106,7 @@
             this.lblIcoDocentes.ForeColor = System.Drawing.Color.FromArgb(16, 185, 129);
             this.lblIcoDocentes.Location = new System.Drawing.Point(175, 30);
             this.lblIcoDocentes.Size = new System.Drawing.Size(36, 32);
-            this.lblIcoDocentes.Text = "👥";
+            this.lblIcoDocentes.Text = "";
             // pnlCard3 — Entregas a tiempo
             this.pnlCard3.BackColor = System.Drawing.Color.White;
             this.pnlCard3.Location = new System.Drawing.Point(504, 24);
@@ -129,7 +129,7 @@
             this.lblIcoEntregas.ForeColor = System.Drawing.Color.FromArgb(16, 185, 129);
             this.lblIcoEntregas.Location = new System.Drawing.Point(175, 30);
             this.lblIcoEntregas.Size = new System.Drawing.Size(36, 32);
-            this.lblIcoEntregas.Text = "✅";
+            this.lblIcoEntregas.Text = "";
             // pnlCard4 — Proyectos con retraso
             this.pnlCard4.BackColor = System.Drawing.Color.White;
             this.pnlCard4.Location = new System.Drawing.Point(744, 24);
@@ -152,7 +152,7 @@
             this.lblIcoRetraso.ForeColor = System.Drawing.Color.FromArgb(245, 158, 11);
             this.lblIcoRetraso.Location = new System.Drawing.Point(175, 30);
             this.lblIcoRetraso.Size = new System.Drawing.Size(36, 32);
-            this.lblIcoRetraso.Text = "⚠";
+            this.lblIcoRetraso.Text = "";
             // pnlDocentes
             this.pnlDocentes.BackColor = System.Drawing.Color.White;
             this.pnlDocentes.Location = new System.Drawing.Point(24, 134);

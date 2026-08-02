@@ -98,7 +98,7 @@
             this.lblBadge.ForeColor = System.Drawing.Color.FromArgb(124, 58, 237);
             this.lblBadge.Location = new System.Drawing.Point(170, 78);
             this.lblBadge.Size = new System.Drawing.Size(100, 20);
-            this.lblBadge.Text = "💼 Docente";
+            this.lblBadge.Text = "Docente";
             this.lblBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // lblNombre
             this.lblNombre.AutoSize = true;

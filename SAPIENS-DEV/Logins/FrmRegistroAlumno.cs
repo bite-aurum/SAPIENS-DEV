@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace SAPIENS_DEV.Logins
         {
             InitializeComponent();
             login = frmlogin;
+            Iconos.EnLabelConTexto(lblBadge, "graduado", Color.FromArgb(59, 130, 246));
         }
 
         private void pnlCard_Paint(object sender, PaintEventArgs e)

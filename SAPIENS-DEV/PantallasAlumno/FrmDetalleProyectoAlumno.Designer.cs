@@ -56,7 +56,7 @@
             this.btnVolver.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
             this.btnVolver.Location = new System.Drawing.Point(24, 16);
             this.btnVolver.Size = new System.Drawing.Size(90, 30);
-            this.btnVolver.Text = "←  Volver";
+            this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);

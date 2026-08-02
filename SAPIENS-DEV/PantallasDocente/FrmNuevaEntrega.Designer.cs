@@ -159,7 +159,7 @@
 			this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
 			this.btnCancelar.Location = new System.Drawing.Point(24, 424);
 			this.btnCancelar.Size = new System.Drawing.Size(140, 40);
-			this.btnCancelar.Text = "✕  Cancelar";
+			this.btnCancelar.Text = "Cancelar";
 			this.btnCancelar.UseVisualStyleBackColor = false;
 			this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -171,7 +171,7 @@
 			this.btnGuardar.ForeColor = System.Drawing.Color.White;
 			this.btnGuardar.Location = new System.Drawing.Point(544, 424);
 			this.btnGuardar.Size = new System.Drawing.Size(180, 40);
-			this.btnGuardar.Text = "💾  Guardar entrega";
+			this.btnGuardar.Text = "Guardar entrega";
 			this.btnGuardar.UseVisualStyleBackColor = false;
 			this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);

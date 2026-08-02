@@ -93,7 +93,7 @@
             this.lblAluIcono.ForeColor = System.Drawing.Color.FromArgb(59, 130, 246);
             this.lblAluIcono.Location = new System.Drawing.Point(0, 12);
             this.lblAluIcono.Size = new System.Drawing.Size(120, 30);
-            this.lblAluIcono.Text = "🎓";
+            this.lblAluIcono.Text = "";
             this.lblAluIcono.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblAluIcono.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblAluIcono.Click += new System.EventHandler(this.Alumno_Click);
@@ -130,7 +130,7 @@
             this.lblDocIcono.ForeColor = System.Drawing.Color.FromArgb(124, 58, 237);
             this.lblDocIcono.Location = new System.Drawing.Point(0, 12);
             this.lblDocIcono.Size = new System.Drawing.Size(120, 30);
-            this.lblDocIcono.Text = "💼";
+            this.lblDocIcono.Text = "";
             this.lblDocIcono.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDocIcono.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDocIcono.Click += new System.EventHandler(this.Docente_Click);
@@ -167,7 +167,7 @@
             this.lblCooIcono.ForeColor = System.Drawing.Color.FromArgb(16, 185, 129);
             this.lblCooIcono.Location = new System.Drawing.Point(0, 12);
             this.lblCooIcono.Size = new System.Drawing.Size(120, 30);
-            this.lblCooIcono.Text = "🛡";
+            this.lblCooIcono.Text = "";
             this.lblCooIcono.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblCooIcono.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblCooIcono.Click += new System.EventHandler(this.Coordinador_Click);

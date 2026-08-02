@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using SAPIENS_DEV.PantallasDocente;
 using System;
@@ -26,6 +27,13 @@ namespace SAPIENS_DEV.PantallasAlumno
 			InitializeComponent();
 			menu = m;
 			idEntrega = id;
+
+			// Iconos, con el mismo coloue correspondia .
+			Iconos.EnBotonTexto(btnVolver, "flecha-izquierda", Color.FromArgb(31, 41, 55));
+			Iconos.EnLabel(lblDropIco, "subir", Color.FromArgb(209, 213, 219), 48);
+			Iconos.EnBotonTexto(btnSeleccionar, "subir", Color.FromArgb(79, 70, 229));
+			Iconos.EnBotonTexto(btnSubir, "subir", Color.White);
+			Iconos.EnLabelConTexto(lblNota, "info", Color.FromArgb(107, 114, 128), 16, true);
 		}
 
 		private void FrmDetalleEntregaAlumno_Load(object sender, EventArgs e)
@@ -94,23 +102,31 @@ namespace SAPIENS_DEV.PantallasAlumno
 			flpArchivos.Controls.Clear();
 			DataTable ar = Db.ArchivosDeEntrega(idEntrega);
 			foreach (DataRow x in ar.Rows)
-				flpArchivos.Controls.Add(new Label
+			{
+				var lblArch = new Label
 				{
-					Text = "📄 " + x["nombre_archivo"] + "  ·  " + x["alumno"] + "  ·  " +
+					Text = x["nombre_archivo"] + "  ·  " + x["alumno"] + "  ·  " +
 						   Convert.ToDateTime(x["fecha_subida"]).ToString("dd/MM/yyyy"),
 					Font = new Font("Segoe UI", 8.5F),
 					ForeColor = Color.FromArgb(31, 41, 55),
 					AutoSize = true,
 					Margin = new Padding(0, 0, 0, 8)
-				});
+				};
+				Iconos.EnLabelConTexto(lblArch, "documento", Color.FromArgb(31, 41, 55));
+				flpArchivos.Controls.Add(lblArch);
+			}
 			if (ar.Rows.Count == 0)
-				flpArchivos.Controls.Add(new Label
+			{
+				var lblVacio = new Label
 				{
-					Text = "🗎  Sin archivos aún",
+					Text = "Sin archivos aún",
 					Font = new Font("Segoe UI", 9F),
 					ForeColor = Color.FromArgb(107, 114, 128),
 					AutoSize = true
-				});
+				};
+				Iconos.EnLabelConTexto(lblVacio, "documento", Color.FromArgb(107, 114, 128));
+				flpArchivos.Controls.Add(lblVacio);
+			}
 		}
 
 		Panel FilaInfo(string etiqueta, string valor, Color colorValor)
@@ -143,8 +159,9 @@ namespace SAPIENS_DEV.PantallasAlumno
 		void SeleccionarArchivo(string ruta)
 		{
 			archivoRuta = ruta;
-			lblArchivoSel.Text = "📄 " + Path.GetFileName(ruta);
+			lblArchivoSel.Text = Path.GetFileName(ruta);
 			lblArchivoSel.ForeColor = Color.FromArgb(16, 185, 129);
+			Iconos.EnLabelConTexto(lblArchivoSel, "documento", Color.FromArgb(16, 185, 129));
 		}
 
 		private void btnSeleccionar_Click(object sender, EventArgs e)

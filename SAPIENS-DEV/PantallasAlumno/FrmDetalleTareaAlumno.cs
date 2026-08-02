@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using SAPIENS_DEV.PantallasDocente;
 using System;
@@ -32,6 +33,13 @@ namespace SAPIENS_DEV.PantallasAlumno
             InitializeComponent();
             menu = m;
             idTarea = id;
+
+            // Iconos, con el mismo color de antes.
+            Iconos.EnBotonTexto(btnVolver, "flecha-izquierda", Color.FromArgb(31, 41, 55));
+            Iconos.EnLabel(lblDropIco, "subir", Color.FromArgb(209, 213, 219), 48);
+            Iconos.EnBotonTexto(btnSeleccionar, "subir", Color.FromArgb(79, 70, 229));
+            Iconos.EnBotonTexto(btnSubir, "subir", Color.White);
+            Iconos.EnLabelConTexto(lblNota, "info", Color.FromArgb(107, 114, 128), 16, true);
         }
 
         private void FrmDetalleTareaAlumno_Load(object sender, EventArgs e)
@@ -126,8 +134,9 @@ namespace SAPIENS_DEV.PantallasAlumno
         void SeleccionarArchivo(string ruta)
         {
             archivoRuta = ruta;
-            lblArchivoSel.Text = "📄 " + Path.GetFileName(ruta);
+            lblArchivoSel.Text = Path.GetFileName(ruta);
             lblArchivoSel.ForeColor = Color.FromArgb(16, 185, 129);
+            Iconos.EnLabelConTexto(lblArchivoSel, "documento", Color.FromArgb(16, 185, 129));
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)

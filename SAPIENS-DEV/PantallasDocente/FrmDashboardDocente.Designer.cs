@@ -80,7 +80,7 @@
 			this.lblIcoProyectos.ForeColor = System.Drawing.Color.FromArgb(79, 70, 229);
 			this.lblIcoProyectos.Location = new System.Drawing.Point(175, 30);
 			this.lblIcoProyectos.Size = new System.Drawing.Size(36, 32);
-			this.lblIcoProyectos.Text = "📁";
+			this.lblIcoProyectos.Text = "";
 			// pnlCard2 — Tareas asignadas
 			this.pnlCard2.BackColor = System.Drawing.Color.White;
 			this.pnlCard2.Location = new System.Drawing.Point(264, 24);
@@ -103,7 +103,7 @@
 			this.lblIcoTareas.ForeColor = System.Drawing.Color.FromArgb(79, 70, 229);
 			this.lblIcoTareas.Location = new System.Drawing.Point(175, 30);
 			this.lblIcoTareas.Size = new System.Drawing.Size(36, 32);
-			this.lblIcoTareas.Text = "✅";
+			this.lblIcoTareas.Text = "";
 			// pnlCard3 — Entregas pendientes
 			this.pnlCard3.BackColor = System.Drawing.Color.White;
 			this.pnlCard3.Location = new System.Drawing.Point(504, 24);
@@ -126,7 +126,7 @@
 			this.lblIcoEntregas.ForeColor = System.Drawing.Color.FromArgb(245, 158, 11);
 			this.lblIcoEntregas.Location = new System.Drawing.Point(175, 30);
 			this.lblIcoEntregas.Size = new System.Drawing.Size(36, 32);
-			this.lblIcoEntregas.Text = "🕐";
+			this.lblIcoEntregas.Text = "";
 			// pnlCard4 — Alumnos activos
 			this.pnlCard4.BackColor = System.Drawing.Color.White;
 			this.pnlCard4.Location = new System.Drawing.Point(744, 24);
@@ -149,7 +149,7 @@
 			this.lblIcoAlumnos.ForeColor = System.Drawing.Color.FromArgb(16, 185, 129);
 			this.lblIcoAlumnos.Location = new System.Drawing.Point(175, 30);
 			this.lblIcoAlumnos.Size = new System.Drawing.Size(36, 32);
-			this.lblIcoAlumnos.Text = "👥";
+			this.lblIcoAlumnos.Text = "";
 			// lblTareasRec
 			this.lblTareasRec.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
 			this.lblTareasRec.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);

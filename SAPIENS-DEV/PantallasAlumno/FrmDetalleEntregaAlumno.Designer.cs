@@ -64,7 +64,7 @@
 			this.btnVolver.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
 			this.btnVolver.Location = new System.Drawing.Point(24, 16);
 			this.btnVolver.Size = new System.Drawing.Size(90, 30);
-			this.btnVolver.Text = "←  Volver";
+			this.btnVolver.Text = "Volver";
 			this.btnVolver.UseVisualStyleBackColor = false;
 			this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -106,7 +106,7 @@
 			this.lblDropIco.ForeColor = System.Drawing.Color.FromArgb(209, 213, 219);
 			this.lblDropIco.Location = new System.Drawing.Point(0, 25);
 			this.lblDropIco.Size = new System.Drawing.Size(425, 30);
-			this.lblDropIco.Text = "⇪";
+			this.lblDropIco.Text = "";
 			this.lblDropIco.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// lblDrop1
 			this.lblDrop1.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -131,7 +131,7 @@
 			this.btnSeleccionar.ForeColor = System.Drawing.Color.FromArgb(79, 70, 229);
 			this.btnSeleccionar.Location = new System.Drawing.Point(132, 115);
 			this.btnSeleccionar.Size = new System.Drawing.Size(160, 30);
-			this.btnSeleccionar.Text = "⇪  Seleccionar archivo";
+			this.btnSeleccionar.Text = "Seleccionar archivo";
 			this.btnSeleccionar.UseVisualStyleBackColor = false;
 			this.btnSeleccionar.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
@@ -146,7 +146,7 @@
 			this.lblNota.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.lblNota.Location = new System.Drawing.Point(20, 268);
 			this.lblNota.Size = new System.Drawing.Size(425, 30);
-			this.lblNota.Text = "ⓘ Al subir el archivo la entrega se marcará como Entregada automáticamente y el docente podrá verla.";
+			this.lblNota.Text = "Al subir el archivo la entrega se marcará como Entregada automáticamente y el docente podrá verla.";
 			// btnSubir
 			this.btnSubir.BackColor = System.Drawing.Color.FromArgb(79, 70, 229);
 			this.btnSubir.FlatAppearance.BorderSize = 0;
@@ -155,7 +155,7 @@
 			this.btnSubir.ForeColor = System.Drawing.Color.White;
 			this.btnSubir.Location = new System.Drawing.Point(20, 310);
 			this.btnSubir.Size = new System.Drawing.Size(425, 40);
-			this.btnSubir.Text = "⇪  Subir archivo";
+			this.btnSubir.Text = "Subir archivo";
 			this.btnSubir.UseVisualStyleBackColor = false;
 			this.btnSubir.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnSubir.Click += new System.EventHandler(this.btnSubir_Click);

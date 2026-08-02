@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using System;
 using System.Collections.Generic;
@@ -82,14 +83,28 @@ namespace SAPIENS_DEV.PantallasCoordinador
                 Location = new Point(66, 31),
                 Size = new Size(340, 16)
             });
-            card.Controls.Add(new Label
+            Color grisChip = Color.FromArgb(107, 114, 128);
+            var lblProy = new Label
             {
-                Text = "📁 " + r["proyectos"] + " proyectos    👥 " + r["alumnos"] + " alumnos",
+                Text = r["proyectos"] + " proyectos",
                 Font = new Font("Segoe UI", 8F),
-                ForeColor = Color.FromArgb(107, 114, 128),
+                ForeColor = grisChip,
                 Location = new Point(66, 50),
-                Size = new Size(340, 16)
-            });
+                Size = new Size(150, 20)
+            };
+            Iconos.EnLabelConTexto(lblProy, "carpeta", grisChip);
+            card.Controls.Add(lblProy);
+
+            var lblAlu = new Label
+            {
+                Text = r["alumnos"] + " alumnos",
+                Font = new Font("Segoe UI", 8F),
+                ForeColor = grisChip,
+                Location = new Point(210, 50),
+                Size = new Size(150, 20)
+            };
+            Iconos.EnLabelConTexto(lblAlu, "personas", grisChip);
+            card.Controls.Add(lblAlu);
             card.Controls.Add(new Label
             {
                 Text = pct + "%",

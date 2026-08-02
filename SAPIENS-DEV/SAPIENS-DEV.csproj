@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="AccesoDatos\Db.cs" />
     <Compile Include="Compartido\Accesibilidad.cs" />
+    <Compile Include="Compartido\Iconos.cs" />
     <Compile Include="Compartido\FrmConfiguracion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +300,9 @@
     <None Include="Actividad\CRUD.docx" />
     <None Include="GUIA DE ESTILOS\Actividad De Aprendizaje 4 %281%29.docx" />
     <None Include="packages.config" />
+    <Content Include="imagenes\*.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

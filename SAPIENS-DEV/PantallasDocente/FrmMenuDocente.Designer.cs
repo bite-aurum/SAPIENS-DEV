@@ -136,7 +136,7 @@
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Size = new System.Drawing.Size(220, 48);
             this.btnDashboard.TabIndex = 2;
-            this.btnDashboard.Text = "   🏠  Dashboard";
+            this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
@@ -151,7 +151,7 @@
             this.btnProyectos.Name = "btnProyectos";
             this.btnProyectos.Size = new System.Drawing.Size(220, 48);
             this.btnProyectos.TabIndex = 3;
-            this.btnProyectos.Text = "   📁  Proyectos";
+            this.btnProyectos.Text = "Proyectos";
             this.btnProyectos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProyectos.Click += new System.EventHandler(this.btnProyectos_Click);
             // 
@@ -166,7 +166,7 @@
             this.btnTareas.Name = "btnTareas";
             this.btnTareas.Size = new System.Drawing.Size(220, 48);
             this.btnTareas.TabIndex = 4;
-            this.btnTareas.Text = "   ✅  Tareas";
+            this.btnTareas.Text = "Tareas";
             this.btnTareas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTareas.Click += new System.EventHandler(this.btnTareas_Click);
             // 
@@ -181,7 +181,7 @@
             this.btnEntregas.Name = "btnEntregas";
             this.btnEntregas.Size = new System.Drawing.Size(220, 48);
             this.btnEntregas.TabIndex = 5;
-            this.btnEntregas.Text = "   📤  Entregas";
+            this.btnEntregas.Text = "Entregas";
             this.btnEntregas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEntregas.Click += new System.EventHandler(this.btnEntregas_Click);
             // 
@@ -196,7 +196,7 @@
             this.btnReportes.Name = "btnReportes";
             this.btnReportes.Size = new System.Drawing.Size(220, 48);
             this.btnReportes.TabIndex = 6;
-            this.btnReportes.Text = "   📊  Reportes";
+            this.btnReportes.Text = "Reportes";
             this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
@@ -211,7 +211,7 @@
             this.btnNotificaciones.Name = "btnNotificaciones";
             this.btnNotificaciones.Size = new System.Drawing.Size(220, 48);
             this.btnNotificaciones.TabIndex = 7;
-            this.btnNotificaciones.Text = "   🔔  Notificaciones";
+            this.btnNotificaciones.Text = "Notificaciones";
             this.btnNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
             // 
@@ -227,7 +227,7 @@
             this.btnConfiguracion.Name = "btnConfiguracion";
             this.btnConfiguracion.Size = new System.Drawing.Size(220, 48);
             this.btnConfiguracion.TabIndex = 8;
-            this.btnConfiguracion.Text = "   ⚙  Configuración";
+            this.btnConfiguracion.Text = "Configuración";
             this.btnConfiguracion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 

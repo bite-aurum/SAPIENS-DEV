@@ -262,7 +262,7 @@
             this.btnQuitarSub.ForeColor = System.Drawing.Color.FromArgb(239, 68, 68);
             this.btnQuitarSub.Location = new System.Drawing.Point(340, 210);
             this.btnQuitarSub.Size = new System.Drawing.Size(330, 28);
-            this.btnQuitarSub.Text = "🗑  Quitar seleccionada";
+            this.btnQuitarSub.Text = "Quitar seleccionada";
             this.btnQuitarSub.UseVisualStyleBackColor = false;
             this.btnQuitarSub.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnQuitarSub.Click += new System.EventHandler(this.btnQuitarSub_Click);
@@ -275,7 +275,7 @@
             this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
             this.btnCancelar.Location = new System.Drawing.Point(24, 720);
             this.btnCancelar.Size = new System.Drawing.Size(140, 40);
-            this.btnCancelar.Text = "✕  Cancelar";
+            this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -287,7 +287,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
             this.btnGuardar.Location = new System.Drawing.Point(544, 720);
             this.btnGuardar.Size = new System.Drawing.Size(180, 40);
-            this.btnGuardar.Text = "💾  Guardar tarea";
+            this.btnGuardar.Text = "Guardar tarea";
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);

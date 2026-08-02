@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace SAPIENS_DEV.Logins
         {
             InitializeComponent();
             login = frmlogin;
+            Iconos.EnLabelConTexto(lblBadge, "maletin", Color.FromArgb(124, 58, 237));
         }
 
         private void FrmRegistroDocente_Load(object sender, EventArgs e)

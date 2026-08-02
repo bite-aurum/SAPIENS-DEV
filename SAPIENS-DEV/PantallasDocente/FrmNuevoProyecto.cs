@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.Compartido;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,12 @@ namespace SAPIENS_DEV.PantallasDocente
         {
             InitializeComponent();
             menu = m;
+
+            // Iconos de los botones, con el mismo color que tenía su emoji.
+            Iconos.EnBotonTexto(btnBuscarAgregar, "lupa", Color.FromArgb(79, 70, 229));
+            Iconos.EnBotonTexto(btnQuitar, "basura", Color.FromArgb(239, 68, 68));
+            Iconos.EnBotonTexto(btnCancelar, "equis", Color.FromArgb(31, 41, 55));
+            Iconos.EnBotonTexto(btnGuardar, "guardar", Color.White);
         }
 
         private void FrmNuevoProyecto_Load(object sender, EventArgs e)

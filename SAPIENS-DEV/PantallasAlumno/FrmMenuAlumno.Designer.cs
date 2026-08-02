@@ -107,7 +107,7 @@
 			this.btnDashboard.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.btnDashboard.Location = new System.Drawing.Point(0, 70);
 			this.btnDashboard.Size = new System.Drawing.Size(220, 48);
-			this.btnDashboard.Text = "   🏠  Dashboard";
+			this.btnDashboard.Text = "Dashboard";
 			this.btnDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnDashboard.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
@@ -118,7 +118,7 @@
 			this.btnProyectos.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.btnProyectos.Location = new System.Drawing.Point(0, 118);
 			this.btnProyectos.Size = new System.Drawing.Size(220, 48);
-			this.btnProyectos.Text = "   📁  Mis proyectos";
+			this.btnProyectos.Text = "Mis proyectos";
 			this.btnProyectos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnProyectos.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnProyectos.Click += new System.EventHandler(this.btnProyectos_Click);
@@ -129,7 +129,7 @@
 			this.btnTareas.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.btnTareas.Location = new System.Drawing.Point(0, 166);
 			this.btnTareas.Size = new System.Drawing.Size(220, 48);
-			this.btnTareas.Text = "   ✅  Mis tareas";
+			this.btnTareas.Text = "Mis tareas";
 			this.btnTareas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnTareas.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnTareas.Click += new System.EventHandler(this.btnTareas_Click);
@@ -140,7 +140,7 @@
 			this.btnEntregas.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.btnEntregas.Location = new System.Drawing.Point(0, 214);
 			this.btnEntregas.Size = new System.Drawing.Size(220, 48);
-			this.btnEntregas.Text = "   📤  Mis entregas";
+			this.btnEntregas.Text = "Mis entregas";
 			this.btnEntregas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnEntregas.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnEntregas.Click += new System.EventHandler(this.btnEntregas_Click);
@@ -151,7 +151,7 @@
 			this.btnNotificaciones.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.btnNotificaciones.Location = new System.Drawing.Point(0, 262);
 			this.btnNotificaciones.Size = new System.Drawing.Size(220, 48);
-			this.btnNotificaciones.Text = "   🔔  Notificaciones";
+			this.btnNotificaciones.Text = "Notificaciones";
 			this.btnNotificaciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnNotificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnNotificaciones.Click += new System.EventHandler(this.btnNotificaciones_Click);
@@ -162,7 +162,7 @@
 			this.btnConfiguracion.Font = new System.Drawing.Font("Segoe UI", 10F);
 			this.btnConfiguracion.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
 			this.btnConfiguracion.Height = 48;
-			this.btnConfiguracion.Text = "   ⚙  Configuración";
+			this.btnConfiguracion.Text = "Configuración";
 			this.btnConfiguracion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);

@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.Compartido;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,13 @@ namespace SAPIENS_DEV.PantallasCoordinador
         {
             InitializeComponent();
             menu = m;
+
+            // Iconos de las tarjetas, con el mismo color que tenia.
+            Color verde = Color.FromArgb(16, 185, 129);
+            Iconos.EnLabel(lblIcoProyectos, "carpeta", verde);
+            Iconos.EnLabel(lblIcoDocentes, "personas", verde);
+            Iconos.EnLabel(lblIcoEntregas, "check", verde);
+            Iconos.EnLabel(lblIcoRetraso, "advertencia", Color.FromArgb(245, 158, 11));
         }
 
         private void FrmRendimientoCoord_Load(object sender, EventArgs e)

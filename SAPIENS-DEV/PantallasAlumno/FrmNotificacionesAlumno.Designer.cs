@@ -44,7 +44,7 @@
             this.btnMarcarTodas.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);
             this.btnMarcarTodas.Location = new System.Drawing.Point(764, 16);
             this.btnMarcarTodas.Size = new System.Drawing.Size(200, 32);
-            this.btnMarcarTodas.Text = "✔  Marcar todas como leídas";
+            this.btnMarcarTodas.Text = "Marcar todas como leídas";
             this.btnMarcarTodas.UseVisualStyleBackColor = false;
             this.btnMarcarTodas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMarcarTodas.Click += new System.EventHandler(this.btnMarcarTodas_Click);

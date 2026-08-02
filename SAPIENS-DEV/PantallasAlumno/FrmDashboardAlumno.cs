@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.Compartido;
 using SAPIENS_DEV.PantallasDocente;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,13 @@ namespace SAPIENS_DEV.PantallasAlumno
 		{
 			InitializeComponent();
 			menu = m;
+
+			// Iconos de las tarjas color corresponde.
+			Color azul = Color.FromArgb(59, 130, 246);
+			Iconos.EnLabel(lblIco1, "carpeta", azul);
+			Iconos.EnLabel(lblIco2, "check", azul);
+			Iconos.EnLabel(lblIco3, "lista", Color.FromArgb(245, 158, 11));
+			Iconos.EnLabel(lblIco4, "calendario", azul);
 		}
 
 		// Hace clickeable una tarjeta completa (incluye sus hijos)

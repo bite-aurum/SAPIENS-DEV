@@ -1,4 +1,5 @@
 ﻿using SAPIENS_DEV.AccesoDatos;
+using SAPIENS_DEV.Compartido;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,12 @@ namespace SAPIENS_DEV.PantallasDocente
 		{
 			InitializeComponent();
 			menu = m;
+
+			// Iconos de las tarjetas, cada uno con el color que temia.
+			Iconos.EnLabel(lblIcoProyectos, "carpeta", Color.FromArgb(79, 70, 229));
+			Iconos.EnLabel(lblIcoTareas, "check", Color.FromArgb(79, 70, 229));
+			Iconos.EnLabel(lblIcoEntregas, "reloj", Color.FromArgb(245, 158, 11));
+			Iconos.EnLabel(lblIcoAlumnos, "personas", Color.FromArgb(16, 185, 129));
 		}
 		private void FrmDashboardDocente_Load(object sender, EventArgs e)
 		{

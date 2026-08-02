@@ -87,7 +87,7 @@
             this.lblBadge.ForeColor = System.Drawing.Color.FromArgb(16, 185, 129);
             this.lblBadge.Location = new System.Drawing.Point(145, 78);
             this.lblBadge.Size = new System.Drawing.Size(150, 20);
-            this.lblBadge.Text = "🛡 Coordinador académico";
+            this.lblBadge.Text = "Coordinador académico";
             this.lblBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // lblNombre
             this.lblNombre.AutoSize = true;

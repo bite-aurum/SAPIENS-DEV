@@ -81,7 +81,7 @@
 			this.lblIco1.ForeColor = System.Drawing.Color.FromArgb(59, 130, 246);
 			this.lblIco1.Location = new System.Drawing.Point(175, 30);
 			this.lblIco1.Size = new System.Drawing.Size(36, 32);
-			this.lblIco1.Text = "📁";
+			this.lblIco1.Text = "";
 			// pnlCard2 — Tareas activas
 			this.pnlCard2.BackColor = System.Drawing.Color.White;
 			this.pnlCard2.Location = new System.Drawing.Point(264, 24);
@@ -104,7 +104,7 @@
 			this.lblIco2.ForeColor = System.Drawing.Color.FromArgb(59, 130, 246);
 			this.lblIco2.Location = new System.Drawing.Point(175, 30);
 			this.lblIco2.Size = new System.Drawing.Size(36, 32);
-			this.lblIco2.Text = "✅";
+			this.lblIco2.Text = "";
 			// pnlCard3 — Subtareas pendientes
 			this.pnlCard3.BackColor = System.Drawing.Color.White;
 			this.pnlCard3.Location = new System.Drawing.Point(504, 24);
@@ -127,7 +127,7 @@
 			this.lblIco3.ForeColor = System.Drawing.Color.FromArgb(245, 158, 11);
 			this.lblIco3.Location = new System.Drawing.Point(175, 30);
 			this.lblIco3.Size = new System.Drawing.Size(36, 32);
-			this.lblIco3.Text = "📋";
+			this.lblIco3.Text = "";
 			// pnlCard4 — Próxima entrega
 			this.pnlCard4.BackColor = System.Drawing.Color.White;
 			this.pnlCard4.Location = new System.Drawing.Point(744, 24);
@@ -150,7 +150,7 @@
 			this.lblIco4.ForeColor = System.Drawing.Color.FromArgb(59, 130, 246);
 			this.lblIco4.Location = new System.Drawing.Point(175, 30);
 			this.lblIco4.Size = new System.Drawing.Size(36, 32);
-			this.lblIco4.Text = "📅";
+			this.lblIco4.Text = "";
 			// lblMisProy
 			this.lblMisProy.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
 			this.lblMisProy.ForeColor = System.Drawing.Color.FromArgb(31, 41, 55);

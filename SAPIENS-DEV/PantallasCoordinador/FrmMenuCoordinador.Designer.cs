@@ -103,7 +103,7 @@
             this.btnRendimiento.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
             this.btnRendimiento.Location = new System.Drawing.Point(0, 70);
             this.btnRendimiento.Size = new System.Drawing.Size(220, 48);
-            this.btnRendimiento.Text = "   📊  Rendimiento";
+            this.btnRendimiento.Text = "Rendimiento";
             this.btnRendimiento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRendimiento.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRendimiento.Click += new System.EventHandler(this.btnRendimiento_Click);
@@ -114,7 +114,7 @@
             this.btnDocentes.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
             this.btnDocentes.Location = new System.Drawing.Point(0, 118);
             this.btnDocentes.Size = new System.Drawing.Size(220, 48);
-            this.btnDocentes.Text = "   👥  Docentes";
+            this.btnDocentes.Text = "Docentes";
             this.btnDocentes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDocentes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDocentes.Click += new System.EventHandler(this.btnDocentes_Click);
@@ -125,7 +125,7 @@
             this.btnProyectos.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
             this.btnProyectos.Location = new System.Drawing.Point(0, 166);
             this.btnProyectos.Size = new System.Drawing.Size(220, 48);
-            this.btnProyectos.Text = "   📁  Proyectos";
+            this.btnProyectos.Text = "Proyectos";
             this.btnProyectos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProyectos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProyectos.Click += new System.EventHandler(this.btnProyectos_Click);
@@ -136,7 +136,7 @@
             this.btnConfiguracion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnConfiguracion.ForeColor = System.Drawing.Color.FromArgb(107, 114, 128);
             this.btnConfiguracion.Height = 48;
-            this.btnConfiguracion.Text = "   ⚙  Configuración";
+            this.btnConfiguracion.Text = "Configuración";
             this.btnConfiguracion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);

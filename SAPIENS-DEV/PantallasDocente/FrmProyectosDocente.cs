@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using System;
 using System.Collections.Generic;
@@ -82,13 +83,14 @@ namespace SAPIENS_DEV.PantallasDocente
             });
 
             // chips
-            string[] chips = { "👥 " + r["alumnos"] + " alumnos", "✅ " + r["tareas"] + " tareas", "📤 " + r["entregas"] + " entregas" };
+            string[] iconosChip = { "personas", "check", "enviar" };
+            string[] textosChip = { r["alumnos"] + " alumnos", r["tareas"] + " tareas", r["entregas"] + " entregas" };
             int cx = 20;
-            foreach (string c in chips)
+            for (int i = 0; i < textosChip.Length; i++)
             {
                 var chip = new Label
                 {
-                    Text = c,
+                    Text = textosChip[i],
                     Font = new Font("Segoe UI", 8F),
                     ForeColor = Color.FromArgb(107, 114, 128),
                     BackColor = Color.White,
@@ -96,6 +98,7 @@ namespace SAPIENS_DEV.PantallasDocente
                     Size = new Size(95, 22),
                     TextAlign = ContentAlignment.MiddleCenter
                 };
+                Iconos.EnLabelConTexto(chip, iconosChip[i], Color.FromArgb(107, 114, 128), 16);
                 chip.Paint += (s, e) => ControlPaint.DrawBorder(e.Graphics, chip.ClientRectangle,
                     Color.FromArgb(209, 213, 219), ButtonBorderStyle.Solid);
                 card.Controls.Add(chip);

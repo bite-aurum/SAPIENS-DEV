@@ -1,3 +1,4 @@
+using SAPIENS_DEV.Compartido;
 ﻿using SAPIENS_DEV.AccesoDatos;
 using SAPIENS_DEV.PantallasCoordinador;
 using SAPIENS_DEV.PantallasDocente;
@@ -26,6 +27,9 @@ namespace SAPIENS_DEV.PantallasAlumno
             InitializeComponent();
             menu = m;
             idProyecto = idProy;
+
+            // Icono del botón, con el mismo color qe tejia .
+            Iconos.EnBotonTexto(btnVolver, "flecha-izquierda", Color.FromArgb(31, 41, 55));
         }
 
         private void FrmDetalleProyectoAlumno_Load(object sender, EventArgs e)

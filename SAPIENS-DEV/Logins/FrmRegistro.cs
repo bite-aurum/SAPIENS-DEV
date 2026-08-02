@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAPIENS_DEV.Compartido;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,11 @@ namespace SAPIENS_DEV.Logins
         {
             InitializeComponent();
             login = frmlogin;
+
+            // Iconos de cada rol colores antiguos .
+            Iconos.EnLabel(lblAluIcono, "graduado", Color.FromArgb(59, 130, 246), 24);
+            Iconos.EnLabel(lblDocIcono, "maletin", Color.FromArgb(124, 58, 237), 24);
+            Iconos.EnLabel(lblCooIcono, "escudo", Color.FromArgb(16, 185, 129), 24);
         }
         private void pnlCard_Paint(object sender, PaintEventArgs e)
         {

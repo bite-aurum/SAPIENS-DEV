@@ -187,7 +187,7 @@
 			this.btnOjo1.FlatAppearance.BorderSize = 1;
 			this.btnOjo1.Location = new System.Drawing.Point(636, 66);
 			this.btnOjo1.Size = new System.Drawing.Size(34, 25);
-			this.btnOjo1.Text = "👁";
+			this.btnOjo1.Text = "";
 			this.btnOjo1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnOjo1.Click += new System.EventHandler(this.btnOjo1_Click);
 			// lblPassNueva
@@ -207,7 +207,7 @@
 			this.btnOjo2.FlatAppearance.BorderSize = 1;
 			this.btnOjo2.Location = new System.Drawing.Point(306, 124);
 			this.btnOjo2.Size = new System.Drawing.Size(34, 25);
-			this.btnOjo2.Text = "👁";
+			this.btnOjo2.Text = "";
 			this.btnOjo2.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnOjo2.Click += new System.EventHandler(this.btnOjo2_Click);
 			// lblPassConfirmar
@@ -227,7 +227,7 @@
 			this.btnOjo3.FlatAppearance.BorderSize = 1;
 			this.btnOjo3.Location = new System.Drawing.Point(636, 124);
 			this.btnOjo3.Size = new System.Drawing.Size(34, 25);
-			this.btnOjo3.Text = "👁";
+			this.btnOjo3.Text = "";
 			this.btnOjo3.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnOjo3.Click += new System.EventHandler(this.btnOjo3_Click);
 			// btnActualizarPass (secundario)
@@ -239,7 +239,9 @@
 			this.btnActualizarPass.ForeColor = System.Drawing.Color.FromArgb(79, 70, 229);
 			this.btnActualizarPass.Location = new System.Drawing.Point(30, 165);
 			this.btnActualizarPass.Size = new System.Drawing.Size(180, 32);
-			this.btnActualizarPass.Text = "🔒  Actualizar contraseña";
+			this.btnActualizarPass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.btnActualizarPass.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+			this.btnActualizarPass.Text = "Actualizar contraseña";
 			this.btnActualizarPass.UseVisualStyleBackColor = false;
 			this.btnActualizarPass.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnActualizarPass.Click += new System.EventHandler(this.btnActualizarPass_Click);
@@ -312,7 +314,9 @@
 			this.btnCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(239, 68, 68);
 			this.btnCerrarSesion.Location = new System.Drawing.Point(24, 730);
 			this.btnCerrarSesion.Size = new System.Drawing.Size(150, 40);
-			this.btnCerrarSesion.Text = "⇥  Cerrar sesión";
+			this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.btnCerrarSesion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+			this.btnCerrarSesion.Text = "Cerrar sesión";
 			this.btnCerrarSesion.UseVisualStyleBackColor = false;
 			this.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
@@ -324,7 +328,9 @@
 			this.btnGuardar.ForeColor = System.Drawing.Color.White;
 			this.btnGuardar.Location = new System.Drawing.Point(554, 730);
 			this.btnGuardar.Size = new System.Drawing.Size(170, 40);
-			this.btnGuardar.Text = "💾  Guardar cambios";
+			this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+			this.btnGuardar.Text = "Guardar cambios";
 			this.btnGuardar.UseVisualStyleBackColor = false;
 			this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);

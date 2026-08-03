@@ -44,6 +44,8 @@ namespace SAPIENS_DEV.PantallasDocente
                 cmbProyecto.ValueMember = "id_proyecto";
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message, "SAPIENS"); }
+            // No se permiten fechas pasadas: así "Faltan X días" nunca es negativo.
+            dtpLimite.MinDate = DateTime.Today;
             dtpLimite.Value = DateTime.Today.AddDays(7);
             CalcularPrioridad();
         }
@@ -63,12 +65,13 @@ namespace SAPIENS_DEV.PantallasDocente
         void CalcularPrioridad()
         {
             int dias = (dtpLimite.Value.Date - DateTime.Today).Days;
+            if (dias < 0) dias = 0; // seguro: nunca mostrar días negativos
             prioridadActual = dias <= 3 ? "alta" : dias <= 7 ? "media" : "baja";
             Color[] c = FrmTareasDocente.ColoresPrioridad(prioridadActual);
             lblPrioridadVal.Text = FrmTareasDocente.Capital(prioridadActual);
             lblPrioridadVal.BackColor = c[0];
             lblPrioridadVal.ForeColor = c[1];
-            lblHintPrioridad.Text = "Faltan " + dias + " días · calculada automáticamente";
+            lblHintPrioridad.Text = "Faltan " + dias + " días";
         }
 
         private void btnAgregarSub_Click(object sender, EventArgs e)
